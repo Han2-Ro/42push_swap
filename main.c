@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/07 14:48:29 by hrother          ###   ########.fr       */
+/*   Updated: 2023/10/07 15:03:25 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,23 @@ t_stack	make_int_stack(char **str_arr, int size)
 		stack.arr[size] = ft_atoi(str_arr[size]);
 	}
 	return (stack);
+}
+
+int	is_sorted(t_stack stack)
+{
+	int	i;
+	int	result;
+
+	if (stack.size != stack.max_size)
+		return (0);
+	i = 1;
+	result = 1;
+	while (i < stack.size)
+	{
+		result &= stack.arr[i - 1] <= stack.arr[i];
+		i++;
+	}
+	return (result);
 }
 
 void	print_stack(t_stack stack)
