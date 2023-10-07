@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 OBJ_DIR = objs
-SRCS = main.c
+SRCS = main.c exec_operation.c
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 NAME = push_swap
 

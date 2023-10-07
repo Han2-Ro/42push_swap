@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/07 15:03:25 by hrother          ###   ########.fr       */
+/*   Updated: 2023/10/07 18:07:05 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_stack	make_int_stack(char **str_arr, int size)
 	stack.size = size;
 	stack.max_size = size;
 	//TODO: check if input is valid
-	while (size-- > 0)
+	while (--size >= 0)
 	{
 		stack.arr[size] = ft_atoi(str_arr[size]);
 	}
@@ -60,12 +60,59 @@ void	print_stack(t_stack stack)
 	ft_printf("\b\b size:%d max_size:%d\n", stack.size, stack.max_size);
 }
 
+void	exec_example(t_stack stack_a, t_stack stack_b)
+{
+	print_stack(stack_a);
+	print_stack(stack_b);
+	ft_printf("sorted:%d\n", is_sorted(stack_a));
+	ft_printf("\n");
+	exec_operation(stack_a, stack_b, "sa");
+	print_stack(stack_a);
+	print_stack(stack_b);
+	ft_printf("\n");
+	exec_operation(stack_a, stack_b, "pb");
+	exec_operation(stack_a, stack_b, "pb");
+	exec_operation(stack_a, stack_b, "pb");
+	print_stack(stack_a);
+	print_stack(stack_b);
+	ft_printf("\n");
+	exec_operation(stack_a, stack_b, "rr");
+	print_stack(stack_a);
+	print_stack(stack_b);
+	ft_printf("\n");
+	exec_operation(stack_a, stack_b, "rrr");
+	print_stack(stack_a);
+	print_stack(stack_b);
+	ft_printf("\n");
+	exec_operation(stack_a, stack_b, "sa");
+	print_stack(stack_a);
+	print_stack(stack_b);
+	ft_printf("\n");
+	exec_operation(stack_a, stack_b, "pa");
+	exec_operation(stack_a, stack_b, "pa");
+	exec_operation(stack_a, stack_b, "pa");
+	print_stack(stack_a);
+	print_stack(stack_b);
+	ft_printf("\n");
+	ft_printf("sorted:%d\n", is_sorted(stack_a));
+}
+
 int	main(int argc, char **argv)
 {
-	t_stack	stack;
+	t_stack	stack_a;
+	t_stack	stack_b;
 
-	stack = make_int_stack(argv + 1, argc - 1);
-	if (!(stack.arr))
+	stack_a = make_int_stack(argv + 1, argc - 1);
+	if (!(stack_a.arr))
 		return (1);
-	print_stack(stack);
+	stack_b.max_size = stack_a.max_size;
+	stack_b.size = 0;
+	stack_b.arr = malloc(stack_b.max_size * sizeof(int));
+	print_stack(stack_a);
+	print_stack(stack_b);
+	ft_printf("\n");
+	push(stack_a, stack_b);
+	print_stack(stack_a);
+	print_stack(stack_b);
+	ft_printf("\n");
 }
