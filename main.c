@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/07 18:07:05 by hrother          ###   ########.fr       */
+/*   Updated: 2023/10/07 23:27:49 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	is_sorted(t_stack stack)
 	result = 1;
 	while (i < stack.size)
 	{
-		result &= stack.arr[i - 1] <= stack.arr[i];
+		result &= stack.arr[i - 1] >= stack.arr[i];
 		i++;
 	}
 	return (result);
@@ -66,31 +66,31 @@ void	exec_example(t_stack stack_a, t_stack stack_b)
 	print_stack(stack_b);
 	ft_printf("sorted:%d\n", is_sorted(stack_a));
 	ft_printf("\n");
-	exec_operation(stack_a, stack_b, "sa");
+	exec_operation(&stack_a, &stack_b, "sa");
 	print_stack(stack_a);
 	print_stack(stack_b);
 	ft_printf("\n");
-	exec_operation(stack_a, stack_b, "pb");
-	exec_operation(stack_a, stack_b, "pb");
-	exec_operation(stack_a, stack_b, "pb");
+	exec_operation(&stack_a, &stack_b, "pb");
+	exec_operation(&stack_a, &stack_b, "pb");
+	exec_operation(&stack_a, &stack_b, "pb");
 	print_stack(stack_a);
 	print_stack(stack_b);
 	ft_printf("\n");
-	exec_operation(stack_a, stack_b, "rr");
+	exec_operation(&stack_a, &stack_b, "rr");
 	print_stack(stack_a);
 	print_stack(stack_b);
 	ft_printf("\n");
-	exec_operation(stack_a, stack_b, "rrr");
+	exec_operation(&stack_a, &stack_b, "rrr");
 	print_stack(stack_a);
 	print_stack(stack_b);
 	ft_printf("\n");
-	exec_operation(stack_a, stack_b, "sa");
+	exec_operation(&stack_a, &stack_b, "sa");
 	print_stack(stack_a);
 	print_stack(stack_b);
 	ft_printf("\n");
-	exec_operation(stack_a, stack_b, "pa");
-	exec_operation(stack_a, stack_b, "pa");
-	exec_operation(stack_a, stack_b, "pa");
+	exec_operation(&stack_a, &stack_b, "pa");
+	exec_operation(&stack_a, &stack_b, "pa");
+	exec_operation(&stack_a, &stack_b, "pa");
 	print_stack(stack_a);
 	print_stack(stack_b);
 	ft_printf("\n");
@@ -108,11 +108,8 @@ int	main(int argc, char **argv)
 	stack_b.max_size = stack_a.max_size;
 	stack_b.size = 0;
 	stack_b.arr = malloc(stack_b.max_size * sizeof(int));
+	//exec_example(stack_a, stack_b);
 	print_stack(stack_a);
-	print_stack(stack_b);
-	ft_printf("\n");
-	push(stack_a, stack_b);
+	exec_str(&stack_a, &stack_b, "sa pb pb pb rr rra rrb sa pa pa pa");
 	print_stack(stack_a);
-	print_stack(stack_b);
-	ft_printf("\n");
 }
