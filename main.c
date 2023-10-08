@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/08 20:44:34 by hrother          ###   ########.fr       */
+/*   Updated: 2023/10/08 22:38:02 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,10 @@ int	main(int argc, char **argv)
 	t_stack	stack_b;
 
 	init_stacks(argc, argv, &stack_a, &stack_b);
+	print_stack(stack_a);
+	print_stack(stack_b);
 	//exec_str(&stack_a, &stack_b, "sa pb rrr ra pb sb pa");
-	ft_printf("%s", shortes_solve(stackdup(stack_a), stackdup(stack_b), "", 6));
+	//ft_printf("%s", shortes_solve(stackdup(stack_a), stackdup(stack_b), "", 6));
 	free(stack_a.arr);
 	free(stack_b.arr);
 }

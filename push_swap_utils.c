@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:24:24 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/08 20:57:24 by hrother          ###   ########.fr       */
+/*   Updated: 2023/10/08 23:07:41 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ t_stack	make_int_stack(char **str_arr, int size)
 	i = 0;
 	while (i < size)
 	{
-		//ft_printf("i:%i\n", i);
-		//ft_printf("arr:%i\n", ft_atoi(str_arr[size - 1 - i]));
 		stack.arr[size - 1 - i] = ft_atoi(str_arr[i]);
 		i++;
 	}
@@ -87,11 +85,18 @@ int	count_ops(char *str, char c)
 int	init_stacks(int argc, char **argv, t_stack *stack_a, t_stack *stack_b)
 {
 	char	**tmp;
+	int		size;
 
+	size = 0;
 	if (argc == 2)
 	{
 		tmp = ft_split(argv[1], ' ');
-		*stack_a = make_int_stack(tmp, ft_strlen((char *)tmp));
+		while (tmp[size])
+			size++;
+		*stack_a = make_int_stack(tmp, size);
+		while (size--)
+			free(tmp[size]);
+		free(tmp);
 	}
 	else
 		*stack_a = make_int_stack(argv + 1, argc - 1);
