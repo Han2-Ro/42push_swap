@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:59:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/07 23:27:20 by hrother          ###   ########.fr       */
+/*   Updated: 2023/10/08 19:18:16 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	rotate(t_stack *stack)
 	int	i;
 	int	tmp;
 
+	if (stack->size <= 1)
+		return ;
 	i = stack->size - 1;
 	tmp = stack->arr[i];
 	while (--i >= 0)
@@ -51,6 +53,8 @@ void	rev_rotate(t_stack *stack)
 	int	i;
 	int	tmp;
 
+	if (stack->size <= 1)
+		return ;
 	i = 1;
 	tmp = stack->arr[0];
 	while (i < stack->size)
@@ -105,4 +109,17 @@ void	exec_str(t_stack *stack_a, t_stack *stack_b, char *str)
 		while (*str && *str != ' ')
 			str++;
 	}
+}
+
+int check(t_stack stack, char *str)
+{
+	t_stack stack_a;
+	t_stack stack_b;
+
+	stack_a = stackdup(stack);
+	stack_b.max_size = stack_a.max_size;
+	stack_b.size = 0;
+	stack_b.arr = malloc(stack_b.max_size * sizeof(int));
+	exec_str(&stack_a, &stack_b, str);
+	return (is_sorted(stack_a));
 }

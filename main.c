@@ -6,46 +6,12 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/07 23:27:49 by hrother          ###   ########.fr       */
+/*   Updated: 2023/10/08 20:44:34 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "push_swap.h"
 
-t_stack	make_int_stack(char **str_arr, int size)
-{
-	t_stack	stack;
-
-	stack.arr = malloc(size * sizeof(int));
-	if (!stack.arr)
-		return (stack);
-	stack.size = size;
-	stack.max_size = size;
-	//TODO: check if input is valid
-	while (--size >= 0)
-	{
-		stack.arr[size] = ft_atoi(str_arr[size]);
-	}
-	return (stack);
-}
-
-int	is_sorted(t_stack stack)
-{
-	int	i;
-	int	result;
-
-	if (stack.size != stack.max_size)
-		return (0);
-	i = 1;
-	result = 1;
-	while (i < stack.size)
-	{
-		result &= stack.arr[i - 1] >= stack.arr[i];
-		i++;
-	}
-	return (result);
-}
 
 void	print_stack(t_stack stack)
 {
@@ -102,14 +68,9 @@ int	main(int argc, char **argv)
 	t_stack	stack_a;
 	t_stack	stack_b;
 
-	stack_a = make_int_stack(argv + 1, argc - 1);
-	if (!(stack_a.arr))
-		return (1);
-	stack_b.max_size = stack_a.max_size;
-	stack_b.size = 0;
-	stack_b.arr = malloc(stack_b.max_size * sizeof(int));
-	//exec_example(stack_a, stack_b);
-	print_stack(stack_a);
-	exec_str(&stack_a, &stack_b, "sa pb pb pb rr rra rrb sa pa pa pa");
-	print_stack(stack_a);
+	init_stacks(argc, argv, &stack_a, &stack_b);
+	//exec_str(&stack_a, &stack_b, "sa pb rrr ra pb sb pa");
+	ft_printf("%s", shortes_solve(stackdup(stack_a), stackdup(stack_b), "", 6));
+	free(stack_a.arr);
+	free(stack_b.arr);
 }
