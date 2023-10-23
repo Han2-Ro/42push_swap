@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 OBJ_DIR = objs
-SRCS = main.c exec_operation.c rec_brootforce.c push_swap_utils.c quicksort.c
+SRCS = main.c exec_operation.c rec_brootforce.c push_swap_utils.c quicksort.c convert_stack.c
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 NAME = push_swap
 

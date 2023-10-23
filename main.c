@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/11 02:07:15 by hrother          ###   ########.fr       */
+/*   Updated: 2023/10/23 16:49:09 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int argc, char **argv)
 	init_stacks(argc, argv, &stack_a, &stack_b);
 	print_stack(stack_a);
 	//print_stack(stack_b);
-	quick_sort(stack_a.arr, 0, stack_a.size - 1);
+	convert_stack(&stack_a);
 	print_stack(stack_a);
 	//exec_str(&stack_a, &stack_b, "sa pb rrr ra pb sb pa");
 	//ft_printf("%s", shortes_solve(stackdup(stack_a), stackdup(stack_b), "", 6));
