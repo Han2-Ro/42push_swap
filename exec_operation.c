@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_operation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:59:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/08 19:18:16 by hrother          ###   ########.fr       */
+/*   Updated: 2023/10/27 19:55:45 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,18 @@ void	exec_operation(t_stack *stack_a, t_stack *stack_b, char *operation)
 	}
 }
 
-void	exec_str(t_stack *stack_a, t_stack *stack_b, char *str)
+char	*exec_str(t_stack *stack_a, t_stack *stack_b, char *str)
 {
-	while (*str)
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		while (*str && *str == ' ')
-			str++;
-		exec_operation(stack_a, stack_b, str);
-		while (*str && *str != ' ')
-			str++;
+		exec_operation(stack_a, stack_b, str + i);
+		while (str[i] && str[i] != '\n')
+			i++;
 	}
+	return (str);
 }
 
 int check(t_stack stack, char *str)

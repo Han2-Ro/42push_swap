@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:14:43 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/23 16:15:44 by hrother          ###   ########.fr       */
+/*   Updated: 2023/10/27 19:47:50 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	push(t_stack *src, t_stack *dst);
 void	swap(t_stack *stack);
 void	rotate(t_stack *stack);
 void	rev_rotate(t_stack *stack);
-void	exec_str(t_stack *stack_a, t_stack *stack_b, char *str);
+char	*exec_str(t_stack *stack_a, t_stack *stack_b, char *str);
 t_stack	make_int_stack(char **str_arr, int size);
 t_stack	stackdup(t_stack stack);
 int		is_sorted(t_stack stack);
@@ -39,5 +39,6 @@ int		init_stacks(int argc, char **argv, t_stack *stack_a, t_stack *stack_b);
 void	quick_sort(int *arr, int start, int end);
 void	convert_stack(t_stack *stack);
 void	print_stack(t_stack stack);
+char *calculate_solution(t_stack *stack_a, t_stack *stack_b);
 
 #endif
