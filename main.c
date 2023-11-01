@@ -6,7 +6,7 @@
 /*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/27 19:49:15 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/01 15:36:15 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,16 @@ int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
 	t_stack	stack_b;
+	char	*solution;
 
 	init_stacks(argc, argv, &stack_a, &stack_b);
-	print_stack(stack_a);
+	//print_stack(stack_a);
 	//print_stack(stack_b);
 	convert_stack(&stack_a);
-	print_stack(stack_a);
-	ft_printf("%s\n", calculate_solution(&stack_a, &stack_b));
-	print_stack(stack_a);
+	solution = calculate_solution(&stack_a, &stack_b);
+	ft_printf("%s", solution);
+	free(solution);
+	//print_stack(stack_a);
 	//exec_str(&stack_a, &stack_b, "sa pb rrr ra pb sb pa");
 	//ft_printf("%s", shortes_solve(stackdup(stack_a), stackdup(stack_b), "", 6));
 	free(stack_a.arr);

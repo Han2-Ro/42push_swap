@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:24:24 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/08 23:07:41 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/01 15:02:07 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,14 @@ int	init_stacks(int argc, char **argv, t_stack *stack_a, t_stack *stack_b)
 	stack_b->size = 0;
 	stack_b->arr = malloc(stack_b->max_size * sizeof(int));
 	return (1);
+}
+
+char	*ft_strattach(char **str, char *to_attach)
+{
+	char *result;
+
+	result = ft_strjoin(*str, to_attach);
+	free(*str);
+	*str = result;
+	return(*str);
 }

@@ -6,7 +6,7 @@
 /*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:59:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/27 19:55:45 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/01 14:11:57 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ char	*exec_str(t_stack *stack_a, t_stack *stack_b, char *str)
 		exec_operation(stack_a, stack_b, str + i);
 		while (str[i] && str[i] != '\n')
 			i++;
+		i++;
 	}
 	return (str);
 }

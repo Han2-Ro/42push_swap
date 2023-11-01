@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quicksort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 01:48:50 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/23 16:47:08 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/01 14:37:17 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	partition(int *arr, int start, int end)
 	{
 		i_left = start;
 		i_right = end - 1;
-		while (arr[i_left] > arr[end])
+		while (i_left < end && arr[i_left] > arr[end])
 			i_left++;
-		while (arr[i_right] < arr[end])
+		while (i_right >= 0 && arr[i_right] < arr[end])
 			i_right--;
 		if (i_left < i_right)
 			swap_ab(arr + i_left, &arr[i_right]);
