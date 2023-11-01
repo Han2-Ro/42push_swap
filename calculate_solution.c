@@ -3,93 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_solution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/01 17:03:26 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/01 21:15:13 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int get_distance(t_stack *stack, int nbr)
-{
-    int i;
-
-    i = 0;
-    while (i < stack->size && stack->arr[i] != nbr)
-        i++;
-    if (i >= stack->size)
-        return (-1);
-    else if (i < stack->size / 2)
-        return (i + 1);
-    else
-        return (stack->size - i - 1);
-}
-
 char *solve_3stack(t_stack *stack_a, t_stack *stack_b)
 {
-    char *str;
+	char *str;
 
-    str = "";
-    if (stack_a->arr[0] == 0)
-        str = exec_str(stack_a, stack_b, "");
-    else if (stack_a->arr[1] == 0)
-        str = exec_str(stack_a, stack_b, "rra\n");
-    else if (stack_a->arr[2] == 0)
-        str = exec_str(stack_a, stack_b, "ra\n");
-    if (stack_a->arr[1] != 1)
-        str = ft_strjoin(str, exec_str(stack_a, stack_b, "sa\n"));
-    return (str);
+	str = "";
+	if (stack_a->arr[0] == 0)
+		str = exec_str(stack_a, stack_b, "");
+	else if (stack_a->arr[1] == 0)
+		str = exec_str(stack_a, stack_b, "rra\n");
+	else if (stack_a->arr[2] == 0)
+		str = exec_str(stack_a, stack_b, "ra\n");
+	if (stack_a->arr[1] != 1)
+		str = ft_strjoin(str, exec_str(stack_a, stack_b, "sa\n"));
+	return (str);
 } 
 
 char *push_nbr_b(t_stack *stack_a, t_stack *stack_b, int nbr)
 {
-    char    *result;
-    int     i;
-    char    *ra;
+	char    *result;
+	int     i;
+	char    *ra;
 
-    result = malloc(sizeof(char));
-    result[0] = '\0';
-    i = 0;
-    while (i < stack_a->size && stack_a->arr[i] != nbr)
-        i++;
-    if (i >= stack_a->size)
-        return (result);
-    else if (i < stack_a->size / 2)
-        ra = "rra\n";
-    else
-        ra = "ra\n";
-    while (stack_a->arr[stack_a->size - 1] != nbr)
-    {
-        ft_strattach(&result, exec_str(stack_a, stack_b, ra));
-    }
-    ft_strattach(&result, exec_str(stack_a, stack_b, "pb\n"));
-    return (result);
+	result = malloc(sizeof(char));
+	result[0] = '\0';
+	i = 0;
+	while (i < stack_a->size && stack_a->arr[i] != nbr)
+		i++;
+	if (i >= stack_a->size)
+		return (result);
+	else if (i < stack_a->size / 2)
+		ra = "rra\n";
+	else
+		ra = "ra\n";
+	while (stack_a->arr[stack_a->size - 1] != nbr)
+	{
+		ft_strattach(&result, exec_str(stack_a, stack_b, ra));
+	}
+	ft_strattach(&result, exec_str(stack_a, stack_b, "pb\n"));
+	return (result);
 }
 
-char *calculate_solution(t_stack *stack_a, t_stack *stack_b)
+int	index_to_insert(t_stack *stack, int val)
 {
-    char    *result;
-    int     i;
+	int	i;
 
-    result = malloc(sizeof(char));
-    result[0] = '\0';
-    while (stack_a->size > 3)
-    {
-        i = stack_a->size - 1;
-        if (i > 3 && get_distance(stack_a, i - 1) < get_distance(stack_a, i) - 1)
-        {
-            ft_strattach(&result, push_nbr_b(stack_a, stack_b, i - 1));
-            ft_strattach(&result, push_nbr_b(stack_a, stack_b, i));
-            ft_strattach(&result, exec_str(stack_a, stack_b, "sb\n"));
-        }
-        ft_strattach(&result, push_nbr_b(stack_a, stack_b, i));
-    }
-    ft_strattach(&result, solve_3stack(stack_a, stack_b)); 
-    while (stack_b->size > 0)
-    {
-        ft_strattach(&result, exec_str(stack_a, stack_b, "pa\n"));
-    }
-    return (result);
+	i = 0;
+	while (stack->arr[i] > val)
+		i++;
+	while (stack->arr[i] < val)
+		i++;
+	return (i - 1);
+}
+
+int	n_ops_to_pb(t_stack *stack_a, t_stack *stack_b, int i_a)
+{
+	int	i_b;
+	int	result;
+
+	i_b = index_to_insert(stack_b, stack_a->arr[i_a]);
+	if (i_a < stack_a->size / 2)
+		result = i_a;
+	else
+		result = stack_a->size - i_a;
+}
+
+char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
+{
+	char	*result;
+	int		i;
+
+	result = malloc(sizeof(char));
+	result[0] = '\0';
+	while (stack_a->size > 3)
+	{
+		
+	}
+	ft_strattach(&result, solve_3stack(stack_a, stack_b)); 
+	while (stack_b->size > 0)
+	{
+		ft_strattach(&result, exec_str(stack_a, stack_b, "pa\n"));
+	}
+	return (result);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/01 15:36:15 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/01 20:46:49 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv)
 	init_stacks(argc, argv, &stack_a, &stack_b);
 	//print_stack(stack_a);
 	//print_stack(stack_b);
-	convert_stack(&stack_a);
+	//convert_stack(&stack_a);
 	solution = calculate_solution(&stack_a, &stack_b);
 	ft_printf("%s", solution);
 	free(solution);
