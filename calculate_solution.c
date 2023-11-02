@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/02 19:05:29 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/03 00:23:08 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char *solve_3stack(t_stack *stack_a, t_stack *stack_b)
 	if (stack_a->arr[1] != 1)
 		str = ft_strjoin(str, exec_str(stack_a, stack_b, "sa\n"));
 	return (str);
-} 
+}
 
 int	index_to_insert(t_stack *stack, int val)
 {
@@ -37,8 +37,31 @@ int	index_to_insert(t_stack *stack, int val)
 		i++;
 	while (i < stack->size && stack->arr[i] < val)
 		i++;
+	if (stack->arr[i - 1] < val)
+	{
+		while (i < stack->size && stack->arr[i - 1] < stack->arr[i])
+			i++;
+	}
 	return (i - 1);
 }
+
+/*int	index_to_insert(t_stack *stack, int val)
+{
+	int	i;
+	int	offset;
+
+	offset = 1;
+	while (offset < stack->size && stack->arr[offset - 1] < stack->arr[offset])
+		offset++;
+	i = 0;
+	while (i < stack->size)
+	{
+		if (i + offset >= stack->size)
+			offset -= stack->size;
+		if (stack->arr[i + offset] > val)
+			return (i + offset - 1);
+	}
+}*/
 
 int	n_ops_to_pb(t_stack *stack_a, t_stack *stack_b, int i_a)
 {
