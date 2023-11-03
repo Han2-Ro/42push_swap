@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/03 00:23:08 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:54:59 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,43 @@ char *solve_3stack(t_stack *stack_a, t_stack *stack_b)
 int	index_to_insert(t_stack *stack, int val)
 {
 	int	i;
+	int	result;
+	int	val_res;
 
+	result = 0;
+	val_res = -2147483647;
 	i = 0;
-	while (i < stack->size && stack->arr[i] > val)
+	while (i < stack->size)
+	{
+		if (stack->arr[i] > val_res)
+		{
+			val_res = stack->arr[i];
+			result = i;
+		}
+		i++;
+	}
+	val_res = -2147483647;
+	i = 0;
+	while (i < stack->size)
+	{
+		if (stack->arr[i] < val && stack->arr[i] > val_res)
+		{
+			val_res = stack->arr[i];
+			result = i;
+		}
+		i++;
+	}
+	return (result);
+	/*while (i < stack->size && stack->arr[i] > val)
 		i++;
 	while (i < stack->size && stack->arr[i] < val)
 		i++;
-	if (stack->arr[i - 1] < val)
+	if (i >= stack->size && stack->arr[i - 1] > val)
 	{
 		while (i < stack->size && stack->arr[i - 1] < stack->arr[i])
 			i++;
 	}
-	return (i - 1);
+	return (i - 1);*/
 }
 
 /*int	index_to_insert(t_stack *stack, int val)
@@ -153,7 +178,7 @@ char	*rotate_b(t_stack *stack_a, t_stack *stack_b)
 		}
 		i++;
 	}
-	while (max_i--)
+	while (max_i-- >= 0)
 	{
 		ft_strattach(&result, exec_str(stack_a, stack_b, "rrb\n"));
 	}
@@ -167,11 +192,11 @@ char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
 	result = malloc(sizeof(char));
 	result[0] = '\0';
 	ft_strattach(&result, exec_str(stack_a, stack_b, "pb\npb\n"));
-	while (stack_a->size > 3)
+	while (stack_a->size > 0)
 	{
 		ft_strattach(&result, push_nbr_b(stack_a, stack_b, find_next_nbr_to_pb(stack_a, stack_b)));
 	}
-	ft_strattach(&result, solve_3stack(stack_a, stack_b));
+	//ft_strattach(&result, solve_3stack(stack_a, stack_b));
 	ft_strattach(&result, rotate_b(stack_a, stack_b));
 	while (stack_b->size > 0)
 	{

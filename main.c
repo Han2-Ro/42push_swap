@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/01 20:46:49 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:42:25 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,14 @@ void	exec_example(t_stack stack_a, t_stack stack_b)
 	ft_printf("sorted:%d\n", is_sorted(stack_a));
 }
 
+void	test_index_to_insert(t_stack *stack)
+{
+	print_stack(*stack);
+	ft_printf("val:%d, res:%d\n", 0, index_to_insert(stack, 0));
+	ft_printf("val:%d, res:%d\n", 100, index_to_insert(stack, 100));
+	ft_printf("val:%d, res:%d\n", -100, index_to_insert(stack, -100));
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
@@ -77,7 +85,6 @@ int	main(int argc, char **argv)
 	ft_printf("%s", solution);
 	free(solution);
 	//print_stack(stack_a);
-	//exec_str(&stack_a, &stack_b, "sa pb rrr ra pb sb pa");
 	//ft_printf("%s", shortes_solve(stackdup(stack_a), stackdup(stack_b), "", 6));
 	free(stack_a.arr);
 	free(stack_b.arr);
