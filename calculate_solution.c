@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/03 14:54:59 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/04 15:19:33 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,16 +188,21 @@ char	*rotate_b(t_stack *stack_a, t_stack *stack_b)
 char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
 {
 	char	*result;
+	char	*ops;
 
 	result = malloc(sizeof(char));
 	result[0] = '\0';
 	ft_strattach(&result, exec_str(stack_a, stack_b, "pb\npb\n"));
 	while (stack_a->size > 0)
 	{
-		ft_strattach(&result, push_nbr_b(stack_a, stack_b, find_next_nbr_to_pb(stack_a, stack_b)));
+		ops = push_nbr_b(stack_a, stack_b, find_next_nbr_to_pb(stack_a, stack_b));
+		ft_strattach(&result, ops);
+		free(ops);
 	}
 	//ft_strattach(&result, solve_3stack(stack_a, stack_b));
-	ft_strattach(&result, rotate_b(stack_a, stack_b));
+	ops = rotate_b(stack_a, stack_b);
+	ft_strattach(&result, ops);
+	free(ops);
 	while (stack_b->size > 0)
 	{
 		ft_strattach(&result, exec_str(stack_a, stack_b, "pa\n"));

@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/03 14:42:25 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/04 14:21:38 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,15 @@ int	main(int argc, char **argv)
 	t_stack	stack_b;
 	char	*solution;
 
+	//TODO: check input: duplicates, non-numbers, numbres out of int range
+	//TODO: optimize: use rr & rrr, use solve for 3
+	//TODO: fix memory leaks
+	//TODO: memory protection
+	//TODO: norminette
 	init_stacks(argc, argv, &stack_a, &stack_b);
-	//print_stack(stack_a);
-	//print_stack(stack_b);
-	//convert_stack(&stack_a);
 	solution = calculate_solution(&stack_a, &stack_b);
 	ft_printf("%s", solution);
 	free(solution);
-	//print_stack(stack_a);
-	//ft_printf("%s", shortes_solve(stackdup(stack_a), stackdup(stack_b), "", 6));
 	free(stack_a.arr);
 	free(stack_b.arr);
 }

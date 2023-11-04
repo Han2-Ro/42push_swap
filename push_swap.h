@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:14:43 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/03 14:01:21 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/04 15:36:24 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	swap(t_stack *stack);
 void	rotate(t_stack *stack);
 void	rev_rotate(t_stack *stack);
 char	*exec_str(t_stack *stack_a, t_stack *stack_b, char *str);
-t_stack	make_int_stack(char **str_arr, int size);
+int		fill_stack(t_stack *stack, char **str_arr, int size);
 t_stack	stackdup(t_stack stack);
 int		is_sorted(t_stack stack);
 int		check(t_stack stack, char *str);
@@ -41,6 +41,6 @@ void	convert_stack(t_stack *stack);
 void	print_stack(t_stack stack);
 char	*calculate_solution(t_stack *stack_a, t_stack *stack_b);
 char	*ft_strattach(char **str, char *to_attach);
-int	index_to_insert(t_stack *stack, int val);
+int		index_to_insert(t_stack *stack, int val);
 
 #endif
