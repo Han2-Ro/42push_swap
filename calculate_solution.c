@@ -6,15 +6,47 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/04 15:19:33 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/04 18:33:03 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char *solve_3stack(t_stack *stack_a, t_stack *stack_b)
+int	min(int a, int b)
 {
-	char *str;
+	if (a <= b)
+		return (a);
+	else
+		return (b);
+}
+
+int	max(int a, int b)
+{
+	if (a >= b)
+		return (a);
+	else
+		return (b);
+}
+
+char	*swap_stacks(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == 'a')
+			str[i] = 'b';
+		else if (str[i] == 'b')
+			str[i] = 'a';
+		i++;
+	}
+	return (str);
+}
+
+char *solve_3stack(t_stack *stack_a, t_stack *stack_b) //TODO: for all nbrs
+{
+	char	*str;
 
 	str = "";
 	if (stack_a->arr[0] == 0)
@@ -58,87 +90,22 @@ int	index_to_insert(t_stack *stack, int val)
 		i++;
 	}
 	return (result);
-	/*while (i < stack->size && stack->arr[i] > val)
-		i++;
-	while (i < stack->size && stack->arr[i] < val)
-		i++;
-	if (i >= stack->size && stack->arr[i - 1] > val)
-	{
-		while (i < stack->size && stack->arr[i - 1] < stack->arr[i])
-			i++;
-	}
-	return (i - 1);*/
 }
 
-/*int	index_to_insert(t_stack *stack, int val)
+int	count_rotates(t_stack *src, t_stack *dest, int i_src)
 {
-	int	i;
-	int	offset;
+	int	i_dest;
+	int	opts[4];
 
-	offset = 1;
-	while (offset < stack->size && stack->arr[offset - 1] < stack->arr[offset])
-		offset++;
-	i = 0;
-	while (i < stack->size)
-	{
-		if (i + offset >= stack->size)
-			offset -= stack->size;
-		if (stack->arr[i + offset] > val)
-			return (i + offset - 1);
-	}
-}*/
-
-int	n_ops_to_pb(t_stack *stack_a, t_stack *stack_b, int i_a)
-{
-	int	i_b;
-	int	result;
-
-//TODO: compare all sums
-	if (i_a < stack_a->size / 2)
-		result = i_a + 1;
-	else
-		result = stack_a->size - i_a - 1;
-	i_b = index_to_insert(stack_b, stack_a->arr[i_a]);
-	if (i_b < stack_a->size / 2)
-		result += i_b + 1;
-	else
-		result += stack_b->size - i_b - 1;
-	return (result);
+	i_dest = index_to_insert(dest, src->arr[i_src]);
+	opts[0] = max(i_src, i_dest) + 1;
+	opts[1] = max(src->size - i_src, dest->size - i_dest) - 1;
+	opts[2] = i_src + dest->size - i_dest;
+	opts[3] = src->size - i_src + i_dest;
+	return (min(min(opts[0], opts[1]), min(opts[2], opts[3])));
 }
 
-char	*push_nbr_b(t_stack *stack_a, t_stack *stack_b, int i_a)
-{
-	int		i_b;
-	int		ra = 0;
-	int		rra = 0;
-	int		rb = 0;
-	int		rrb = 0;
-	char	*result;
-
-	result = malloc(sizeof(char));
-	result[0] = '\0';
-	if (i_a < stack_a->size / 2)
-		rra = (i_a + 1);
-	else
-		ra = stack_a->size - i_a - 1;
-	i_b = index_to_insert(stack_b, stack_a->arr[i_a]);
-	if (i_b < stack_a->size / 2)
-		rrb = (i_b + 1);
-	else
-		rb = stack_b->size - i_b - 1;
-	while (ra--)
-		ft_strattach(&result, exec_str(stack_a, stack_b, "ra\n"));
-	while (rra--)
-		ft_strattach(&result, exec_str(stack_a, stack_b, "rra\n"));
-	while (rb--)
-		ft_strattach(&result, exec_str(stack_a, stack_b, "rb\n"));
-	while (rrb--)
-		ft_strattach(&result, exec_str(stack_a, stack_b, "rrb\n"));
-	ft_strattach(&result, exec_str(stack_a, stack_b, "pb\n"));
-	return (result);
-}
-
-int	find_next_nbr_to_pb(t_stack *stack_a, t_stack *stack_b)
+int	find_next_nbr(t_stack *src, t_stack *dest)
 {
 	int	i;
 	int	best_i;
@@ -146,16 +113,33 @@ int	find_next_nbr_to_pb(t_stack *stack_a, t_stack *stack_b)
 
 	best_val = 2147483647; //TODO: max int
 	i = 0;
-	while (i < stack_a->size)
+	while (i < src->size)
 	{
-		if (n_ops_to_pb(stack_a, stack_b, i) < best_val)
+		if (count_rotates(src, dest, i) < best_val)
 		{
 			best_i = i;
-			best_val = n_ops_to_pb(stack_a, stack_b, i);
+			best_val = count_rotates(src, dest, i);
 		}
 		i++;
 	}
 	return (best_i);
+}
+
+char	*push_next_nbr(t_stack *src, t_stack *dest)
+{
+	char	*result;
+	char	*tmp;
+	int		i_src;
+	int		i_dest;
+
+	(void) tmp;
+	result = emptystr();
+	i_src = find_next_nbr(src, dest);
+	i_dest = index_to_insert(dest, src->arr[i_src]);
+	ft_strattach(&result, "rra\n", i_src + 1);
+	ft_strattach(&result, "rb\n", dest->size - i_dest + 1);
+	//TODO: work
+	return (result);
 }
 
 char	*rotate_b(t_stack *stack_a, t_stack *stack_b)
@@ -180,7 +164,7 @@ char	*rotate_b(t_stack *stack_a, t_stack *stack_b)
 	}
 	while (max_i-- >= 0)
 	{
-		ft_strattach(&result, exec_str(stack_a, stack_b, "rrb\n"));
+		ft_strattach(&result, exec_str(stack_a, stack_b, "rrb\n"), 1);
 	}
 	return (result);
 }
@@ -192,20 +176,20 @@ char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
 
 	result = malloc(sizeof(char));
 	result[0] = '\0';
-	ft_strattach(&result, exec_str(stack_a, stack_b, "pb\npb\n"));
+	ft_strattach(&result, exec_str(stack_a, stack_b, "pb\npb\n"), 1);
 	while (stack_a->size > 0)
 	{
-		ops = push_nbr_b(stack_a, stack_b, find_next_nbr_to_pb(stack_a, stack_b));
-		ft_strattach(&result, ops);
+		ops = push_next_nbr(stack_a, stack_b);
+		ft_strattach(&result, ops, 1);
 		free(ops);
 	}
 	//ft_strattach(&result, solve_3stack(stack_a, stack_b));
-	ops = rotate_b(stack_a, stack_b);
-	ft_strattach(&result, ops);
-	free(ops);
 	while (stack_b->size > 0)
 	{
-		ft_strattach(&result, exec_str(stack_a, stack_b, "pa\n"));
+		ft_strattach(&result, exec_str(stack_a, stack_b, "pa\n"), 1);
 	}
+	ops = rotate_b(stack_a, stack_b);
+	ft_strattach(&result, ops, 1);
+	free(ops);
 	return (result);
 }

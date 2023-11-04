@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:24:24 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/04 15:48:11 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/04 18:28:44 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ void	error(char *msg, t_stack *stack_a, t_stack *stack_b)
 	free(stack_b->arr);
 	ft_putendl_fd(msg, 2);
 	exit(1);
+}
+
+char	*emptystr(void)
+{
+	char	*str;
+
+	str = malloc(sizeof(char));
+	str[0] = '\0';
+	return (str);
 }
 
 int	check_is_int(char *str)
@@ -154,12 +163,15 @@ int	init_stacks(int argc, char **argv, t_stack *stack_a, t_stack *stack_b)
 	return (1);
 }
 
-char	*ft_strattach(char **str, char *to_attach)
+char	*ft_strattach(char **str, char *to_attach, int repeats)
 {
 	char	*result;
 
+	if (repeats < 1)
+		return (*str);
 	result = ft_strjoin(*str, to_attach);
 	free(*str);
 	*str = result;
+	ft_strattach(str, to_attach, repeats - 1);
 	return (*str);
 }
