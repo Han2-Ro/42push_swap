@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/05 18:19:59 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/05 22:28:32 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ char	*swap_stacks(char *str)
 	}
 	return (str);
 }
-
+/*
 char *solve_3stack(t_stack *stack_a, t_stack *stack_b) //TODO: for all nbrs
 {
 	char	*str;
 
 	str = "";
-	if (stack_a->arr[0] == 0)
+	if (stack_a->arr[0] < stack_a->arr[1] && stack_a->arr[0] < stack_a->arr[2])
 		str = exec_str(stack_a, stack_b, "");
 	else if (stack_a->arr[1] == 0)
 		str = exec_str(stack_a, stack_b, "rra\n");
@@ -58,6 +58,32 @@ char *solve_3stack(t_stack *stack_a, t_stack *stack_b) //TODO: for all nbrs
 	if (stack_a->arr[1] != 1)
 		str = ft_strjoin(str, exec_str(stack_a, stack_b, "sa\n"));
 	return (str);
+}
+*/
+char *solve_3stack(t_stack *stack_a, t_stack *stack_b)
+{
+	if (stack_a->arr[0] > stack_a->arr[1] && stack_a->arr[0] > stack_a->arr[2])
+	{
+		if (stack_a->arr[1] > stack_a->arr[2])
+			return ("");
+		else
+			return (exec_str(stack_a, stack_b, "sa\n"));
+	}
+	else if (stack_a->arr[1] > stack_a->arr[0] && stack_a->arr[1] > stack_a->arr[2])
+	{
+		if (stack_a->arr[2] > stack_a->arr[0])
+			return ("");
+		else
+			return (exec_str(stack_a, stack_b, "sa\n"));
+	}
+	else if (stack_a->arr[2] > stack_a->arr[0] && stack_a->arr[2] > stack_a->arr[1])
+	{
+		if (stack_a->arr[0] > stack_a->arr[1])
+			return ("");
+		else
+			return (exec_str(stack_a, stack_b, "sa\n"));
+	}
+	return (0);
 }
 
 int	index_to_insert(t_stack *stack, int val, int ascending)
@@ -219,14 +245,14 @@ char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
 
 	result = malloc(sizeof(char));
 	result[0] = '\0';
-	ft_strattach(&result, exec_str(stack_a, stack_b, "pb\npb\n"), 1);
-	while (stack_a->size > 2)
+	//ft_strattach(&result, exec_str(stack_a, stack_b, "pb\npb\n"), 1);
+	while (stack_a->size > 3)
 	{
 		ops = push_next_nbr(stack_a, stack_b, 0);
 		ft_strattach(&result, ops, 1);
 		free(ops);
 	}
-	//ft_strattach(&result, solve_3stack(stack_a, stack_b));
+	ft_strattach(&result, solve_3stack(stack_a, stack_b), 1);
 	while (stack_b->size > 0)
 	{
 		//ft_strattach(&result, exec_str(stack_a, stack_b, "pa\n"), 1);
