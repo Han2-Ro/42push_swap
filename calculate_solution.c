@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/05 18:02:22 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/05 18:19:59 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ int	index_to_insert(t_stack *stack, int val, int ascending)
 	int	val_res;
 
 	result = 0;
-	val_res = -2147483647;
+	if (ascending)
+		val_res = 2147483647;
+	else
+		val_res = -2147483648;
 	i = 0;
 	while (i < stack->size)
 	{
@@ -79,7 +82,10 @@ int	index_to_insert(t_stack *stack, int val, int ascending)
 		}
 		i++;
 	}
-	val_res = -2147483647;
+	if (ascending)
+		val_res = 2147483647;
+	else
+		val_res = -2147483648;
 	i = 0;
 	while (i < stack->size)
 	{
@@ -214,7 +220,7 @@ char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
 	result = malloc(sizeof(char));
 	result[0] = '\0';
 	ft_strattach(&result, exec_str(stack_a, stack_b, "pb\npb\n"), 1);
-	while (stack_a->size > 0)
+	while (stack_a->size > 2)
 	{
 		ops = push_next_nbr(stack_a, stack_b, 0);
 		ft_strattach(&result, ops, 1);
@@ -223,7 +229,10 @@ char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
 	//ft_strattach(&result, solve_3stack(stack_a, stack_b));
 	while (stack_b->size > 0)
 	{
-		ft_strattach(&result, exec_str(stack_a, stack_b, "pa\n"), 1);
+		//ft_strattach(&result, exec_str(stack_a, stack_b, "pa\n"), 1);
+		ops = push_next_nbr(stack_b, stack_a, 1);
+		ft_strattach(&result, swap_stacks(ops), 1);
+		free(ops);
 	}
 	ops = final_rotate(stack_a, stack_b);
 	ft_strattach(&result, ops, 1);
