@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -g #-Wall -Wextra -Werror
 OBJ_DIR = objs
 SRCS = main.c exec_operation.c rec_brootforce.c push_swap_utils.c quicksort.c convert_stack.c calculate_solution.c
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))

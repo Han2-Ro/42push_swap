@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:14:43 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/05 16:19:28 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/05 17:42:08 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	convert_stack(t_stack *stack);
 void	print_stack(t_stack stack);
 char	*calculate_solution(t_stack *stack_a, t_stack *stack_b);
 char	*ft_strattach(char **str, char *to_attach, int repeats);
-int		index_to_insert(t_stack *stack, int val);
 char	*emptystr(void);
 
 #endif
