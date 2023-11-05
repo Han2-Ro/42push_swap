@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/04 18:33:03 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/05 16:56:54 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,17 +132,53 @@ char	*push_next_nbr(t_stack *src, t_stack *dest)
 	int		i_src;
 	int		i_dest;
 
-	(void) tmp;
 	result = emptystr();
+	tmp = emptystr();
 	i_src = find_next_nbr(src, dest);
 	i_dest = index_to_insert(dest, src->arr[i_src]);
 	ft_strattach(&result, "rra\n", i_src + 1);
-	ft_strattach(&result, "rb\n", dest->size - i_dest + 1);
-	//TODO: work
+	ft_strattach(&result, "rb\n", dest->size - i_dest - 1);
+	ft_strattach(&tmp, "ra\n", src->size - i_src - 1);
+	ft_strattach(&tmp, "rrb\n", i_dest + 1);
+	if (count_ops(tmp) < count_ops(result))
+	{
+		free(result);
+		result = tmp;
+	}
+	else
+		free(tmp);
+	tmp = emptystr();
+	ft_strattach(&tmp, "rrr\n", min(i_src, i_dest) + 1);
+	if (i_src > i_dest)
+		ft_strattach(&tmp, "rra\n", i_src - i_dest);
+	else
+		ft_strattach(&tmp, "rrb\n", i_dest - i_src);
+	if (count_ops(tmp) < count_ops(result))
+	{
+		free(result);
+		result = tmp;
+	}
+	else
+		free(tmp);
+	tmp = emptystr();
+	ft_strattach(&tmp, "rr\n", min(src->size - i_src, dest->size - i_dest) - 1);
+	if (src->size - i_src > dest->size - i_dest)
+		ft_strattach(&tmp, "ra\n", (src->size - i_src) - (dest->size - i_dest));
+	else
+		ft_strattach(&tmp, "rb\n", (dest->size - i_dest) - (src->size - i_src));
+	if (count_ops(tmp) < count_ops(result))
+	{
+		free(result);
+		result = tmp;
+	}
+	else
+		free(tmp);
+	ft_strattach(&result, "pb\n", 1);
+	exec_str(src, dest, result);
 	return (result);
 }
 
-char	*rotate_b(t_stack *stack_a, t_stack *stack_b)
+char	*final_rotate(t_stack *stack_a, t_stack *stack_b)
 {
 	int	i;
 	int	max_i;
@@ -153,18 +189,18 @@ char	*rotate_b(t_stack *stack_a, t_stack *stack_b)
 	result[0] = '\0';
 	i = 0;
 	max_val = -2147483647;
-	while (i < stack_b->size)
+	while (i < stack_a->size)
 	{
-		if (stack_b->arr[i] > max_val)
+		if (stack_a->arr[i] > max_val)
 		{
 			max_i = i;
-			max_val = stack_b->arr[i];
+			max_val = stack_a->arr[i];
 		}
 		i++;
 	}
-	while (max_i-- >= 0)
+	while (max_i-- > 0)
 	{
-		ft_strattach(&result, exec_str(stack_a, stack_b, "rrb\n"), 1);
+		ft_strattach(&result, exec_str(stack_a, stack_b, "rra\n"), 1);
 	}
 	return (result);
 }
@@ -188,7 +224,7 @@ char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
 	{
 		ft_strattach(&result, exec_str(stack_a, stack_b, "pa\n"), 1);
 	}
-	ops = rotate_b(stack_a, stack_b);
+	ops = final_rotate(stack_a, stack_b);
 	ft_strattach(&result, ops, 1);
 	free(ops);
 	return (result);

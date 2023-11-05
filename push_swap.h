@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:14:43 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/04 18:33:28 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/05 16:19:28 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		fill_stack(t_stack *stack, char **str_arr, int size);
 t_stack	stackdup(t_stack stack);
 int		is_sorted(t_stack stack);
 int		check(t_stack stack, char *str);
-int		count_ops(char *str, char c);
+int		count_ops(char *str);
 char	*shortes_solve(t_stack stack_a, t_stack stack_b, char *str, int limit);
 int		init_stacks(int argc, char **argv, t_stack *stack_a, t_stack *stack_b);
 void	quick_sort(int *arr, int start, int end);

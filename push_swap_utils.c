@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:24:24 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/04 18:28:44 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/05 16:30:15 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_is_int(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]))
+		if (!(ft_isdigit(str[i]) || str[i] == '+' || str[i] == '-'))
 			return (0);
 		i++;
 	}
@@ -121,7 +121,7 @@ int	is_sorted(t_stack stack)
 	return (result);
 }
 
-int	count_ops(char *str, char c)
+int	count_ops(char *str)
 {
 	int	res;
 
@@ -130,7 +130,7 @@ int	count_ops(char *str, char c)
 	res = 0;
 	while (*str)
 	{
-		if (*str == c)
+		if (*str == '\n')
 			res++;
 		str++;
 	}
