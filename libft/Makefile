@@ -6,7 +6,7 @@
 #    By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 12:56:10 by hrother           #+#    #+#              #
-#    Updated: 2023/10/07 13:38:11 by hrother          ###   ########.fr        #
+#    Updated: 2023/11/06 18:39:22 by hrother          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c \
 		ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
 		ft_putnbr_fd.c ft_print_c.c ft_print_i.c ft_print_p.c ft_print_s.c \
-		ft_print_u.c ft_print_x.c ft_printf.c
+		ft_print_u.c ft_print_x.c ft_printf.c \
+		get_next_line_utils.c get_next_line.c
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 NAME = libft.a
 

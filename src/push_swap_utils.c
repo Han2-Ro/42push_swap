@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:24:24 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/06 17:36:40 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/06 17:58:06 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ int	max(int a, int b)
 
 void	error(char *msg, t_stack *stack_a, t_stack *stack_b)
 {
+	(void)msg;
 	free(stack_a->arr);
 	free(stack_b->arr);
-	ft_putendl_fd(msg, 2);
+	ft_putendl_fd("Error", 2);
 	exit(1);
 }
 

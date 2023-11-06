@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:22:13 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/07 13:25:24 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/06 18:45:21 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 int		ft_printf(const char *str, ...);
+char	*get_next_line(int fd);
 
 #endif

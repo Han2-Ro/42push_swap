@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 23:11:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/06 17:23:52 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/06 18:19:28 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ int	check_is_int(char *str)
 	int	i;
 
 	i = 0;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
 	while (str[i])
 	{
-		if (!(ft_isdigit(str[i]) || str[i] == '+' || str[i] == '-'))
+		if (!ft_isdigit(str[i]))
 			return (0);
 		i++;
 	}

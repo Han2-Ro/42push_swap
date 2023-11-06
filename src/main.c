@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/06 17:40:42 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/06 17:43:49 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ int	main(int argc, char **argv)
 	t_stack	stack_b;
 	char	*solution;
 
-	//TODO: check input: duplicates, non-numbers, numbres out of int range
-	//TODO: optimize: use rr & rrr, use solve for 3
+	//TODO: check input: numbres out of int range
 	//TODO: fix memory leaks
 	//TODO: memory protection
 	//TODO: norminette

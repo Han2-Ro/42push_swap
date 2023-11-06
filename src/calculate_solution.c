@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/06 17:37:33 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/06 18:28:57 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int	index_to_insert(t_stack *stack, int val, int ascending)
 	i = 0;
 	while (i < stack->size)
 	{
-		if ((!ascending && stack->arr[i] > val_res)
-			|| (ascending && stack->arr[i] < val_res))
+		if ((!ascending && stack->arr[i] >= val_res)
+			|| (ascending && stack->arr[i] <= val_res))
 		{
 			val_res = stack->arr[i];
 			result = i;
@@ -99,8 +99,8 @@ int	index_to_insert(t_stack *stack, int val, int ascending)
 	i = 0;
 	while (i < stack->size)
 	{
-		if ((!ascending && stack->arr[i] < val && stack->arr[i] > val_res)
-			|| (ascending && stack->arr[i] > val && stack->arr[i] < val_res))
+		if ((!ascending && stack->arr[i] < val && stack->arr[i] >= val_res)
+			|| (ascending && stack->arr[i] > val && stack->arr[i] <= val_res))
 		{
 			val_res = stack->arr[i];
 			result = i;
@@ -227,9 +227,11 @@ char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
 	char	*result;
 	char	*ops;
 
-	result = malloc(sizeof(char));
-	result[0] = '\0';
-	//ft_strattach(&result, exec_str(stack_a, stack_b, "pb\npb\n"), 1);
+	result = emptystr();
+	if (stack_a->size <= 1)
+		return (result);
+	else if (stack_a->size == 2 && stack_a->arr[0] < stack_a->arr[1])
+		return (ft_strattach(&result, "sa\n", 1));
 	while (stack_a->size > 3)
 	{
 		ops = push_next_nbr(stack_a, stack_b, 0);
@@ -239,7 +241,6 @@ char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
 	ft_strattach(&result, solve_3stack(stack_a, stack_b), 1);
 	while (stack_b->size > 0)
 	{
-		//ft_strattach(&result, exec_str(stack_a, stack_b, "pa\n"), 1);
 		ops = push_next_nbr(stack_b, stack_a, 1);
 		ft_strattach(&result, swap_stacks(ops), 1);
 		free(ops);
