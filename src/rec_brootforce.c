@@ -6,11 +6,11 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:13:13 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/08 20:04:39 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/06 17:18:05 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 char	*shortes_solve(t_stack stack_a, t_stack stack_b, char *op, int limit)
 {

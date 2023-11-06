@@ -1,7 +1,8 @@
 CC = cc
 CFLAGS = -g #-Wall -Wextra -Werror
+SRC_DIR = src
 OBJ_DIR = objs
-SRCS = main.c exec_operation.c rec_brootforce.c push_swap_utils.c quicksort.c convert_stack.c calculate_solution.c
+SRCS = main.c init_stacks.c exec_operation.c push_swap_utils.c string_utils.c quicksort.c convert_stack.c calculate_solution.c# rec_brootforce.c
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 NAME = push_swap
 
@@ -15,7 +16,7 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 

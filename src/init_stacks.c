@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_stack.c                                       :+:      :+:    :+:   */
+/*   init_stacks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 23:11:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/05 23:12:47 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/06 17:23:52 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pushswap.h"
+#include "../push_swap.h"
 
 int	check_is_int(char *str)
 {
@@ -67,5 +67,31 @@ int	fill_stack(t_stack *stack, char **str_arr, int size)
 	}
 	if (!check_duplicates(stack))
 		return (free(stack->arr), stack->arr = NULL, 0);
+	return (1);
+}
+
+int	init_stacks(int argc, char **argv, t_stack *stack_a, t_stack *stack_b)
+{
+	char	**tmp;
+	int		size;
+
+	size = 0;
+	if (argc == 2)
+	{
+		tmp = ft_split(argv[1], ' ');
+		while (tmp[size])
+			size++;
+		fill_stack(stack_a, tmp, size);
+		while (size--)
+			free(tmp[size]);
+		free(tmp);
+	}
+	else
+		fill_stack(stack_a, argv + 1, argc - 1);
+	stack_b->max_size = stack_a->max_size;
+	stack_b->size = 0;
+	stack_b->arr = malloc(stack_b->max_size * sizeof(int));
+	if (!(stack_a->arr && stack_b->arr))
+		error("ERROR: Invalid Input", stack_a, stack_b);
 	return (1);
 }

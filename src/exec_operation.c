@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_operation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:59:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/01 14:11:57 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/06 17:17:00 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	swap(t_stack *stack)
 {

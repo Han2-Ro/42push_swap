@@ -6,11 +6,11 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 15:26:03 by hrother           #+#    #+#             */
-/*   Updated: 2023/10/23 16:49:37 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/06 17:20:42 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	convert_stack(t_stack *stack)
 {

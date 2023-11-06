@@ -6,27 +6,11 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/05 22:28:32 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/06 17:37:33 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-int	min(int a, int b)
-{
-	if (a <= b)
-		return (a);
-	else
-		return (b);
-}
-
-int	max(int a, int b)
-{
-	if (a >= b)
-		return (a);
-	else
-		return (b);
-}
+#include "../push_swap.h"
 
 char	*swap_stacks(char *str)
 {
