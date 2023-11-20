@@ -23,8 +23,18 @@ void	print_stack(t_stack stack)
 		ft_printf("%d, ", stack. arr[i]);
 		i++;
 	}
-	ft_printf("\b\b size:%d max_size:%d\n", stack.size, stack.max_size);
+	ft_printf("\b\b size:%d max_size:%d offset: %d\n", stack.size, stack.max_size, stack.offset);
 }
+
+void	test_index_to_insert(t_stack *stack_a)
+{
+	int index;
+	print_stack(*stack_a);
+	ft_printf("wa(-1):%d\n", wa_array(-1, stack_a));
+	index = index_to_insert(stack_a, 5, 1);
+	ft_printf("index: %d\n", index);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
@@ -34,8 +44,10 @@ int	main(int argc, char **argv)
 	//TODO: check input: numbres out of int range
 	//TODO: fix memory leaks
 	//TODO: memory protection
+	//TODO: optimize runtime
 	//TODO: norminette
 	init_stacks(argc, argv, &stack_a, &stack_b);
+	update_offset(&stack_a, 1);
 	solution = calculate_solution(&stack_a, &stack_b);
 	ft_printf("%s", solution);
 	free(solution);

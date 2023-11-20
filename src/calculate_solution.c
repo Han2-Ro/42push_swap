@@ -72,10 +72,39 @@ char *solve_3stack(t_stack *stack_a, t_stack *stack_b)
 
 int	index_to_insert(t_stack *stack, int val, int ascending)
 {
+	int	bottom;
+	int mid;
+	int	top;
+
+	(void) ascending;
+	bottom = 0;
+	top = stack->size - 1;
+	if ((ascending && val < stack->arr[wa_array(top, stack)])
+		|| (!ascending && val > stack->arr[wa_array(top, stack)]))
+		return (top);
+	if ((ascending && val > stack->arr[wa_array(bottom, stack)])
+		|| (!ascending && val < stack->arr[wa_array(bottom, stack)]))
+		return (top);
+	while (bottom + 1 < top)
+	{
+		mid = (bottom + top) / 2;
+		if ((ascending && val > stack->arr[wa_array(mid, stack)])
+			|| (!ascending && val < stack->arr[wa_array(mid, stack)]))
+			top = mid;
+		else
+			bottom = mid;
+	}
+	return (wa_array(bottom, stack));
+}
+
+/*
+int	index_to_insert(t_stack *stack, int val, int ascending)
+{
 	int	i;
 	int	result;
 	int	val_res;
 
+	debug("index to insert");
 	result = 0;
 	if (ascending)
 		val_res = 2147483647;
@@ -84,6 +113,7 @@ int	index_to_insert(t_stack *stack, int val, int ascending)
 	i = 0;
 	while (i < stack->size)
 	{
+		debug("comparing values");
 		if ((!ascending && stack->arr[i] >= val_res)
 			|| (ascending && stack->arr[i] <= val_res))
 		{
@@ -99,6 +129,7 @@ int	index_to_insert(t_stack *stack, int val, int ascending)
 	i = 0;
 	while (i < stack->size)
 	{
+		debug("comparing values");
 		if ((!ascending && stack->arr[i] < val && stack->arr[i] >= val_res)
 			|| (ascending && stack->arr[i] > val && stack->arr[i] <= val_res))
 		{
@@ -109,12 +140,14 @@ int	index_to_insert(t_stack *stack, int val, int ascending)
 	}
 	return (result);
 }
+*/
 
 int	count_rotates(t_stack *src, t_stack *dest, int i_src, int ascending)
 {
 	int	i_dest;
 	int	opts[4];
 
+	debug("Counting rotates...");
 	i_dest = index_to_insert(dest, src->arr[i_src], ascending);
 	opts[0] = max(i_src, i_dest) + 1;
 	opts[1] = max(src->size - i_src, dest->size - i_dest) - 1;
@@ -128,15 +161,17 @@ int	find_next_nbr(t_stack *src, t_stack *dest, int ascending)
 	int	i;
 	int	best_i;
 	int	best_val;
+	int	current_val;
 
 	best_val = 2147483647; //TODO: max int
 	i = 0;
 	while (i < src->size)
 	{
-		if (count_rotates(src, dest, i, ascending) < best_val)
+		current_val = count_rotates(src, dest, i, ascending);
+		if (current_val < best_val)
 		{
 			best_i = i;
-			best_val = count_rotates(src, dest, i, ascending);
+			best_val = current_val;
 		}
 		i++;
 	}
@@ -150,6 +185,7 @@ char	*push_next_nbr(t_stack *src, t_stack *dest, int ascending)
 	int		i_src;
 	int		i_dest;
 
+	debug("pushing next nbr..");
 	result = emptystr();
 	tmp = emptystr();
 	i_src = find_next_nbr(src, dest, ascending);
@@ -193,6 +229,8 @@ char	*push_next_nbr(t_stack *src, t_stack *dest, int ascending)
 		free(tmp);
 	ft_strattach(&result, "pb\n", 1);
 	exec_str(src, dest, result);
+	update_offset(src, !ascending);
+	update_offset(dest, ascending);
 	return (result);
 }
 
@@ -232,6 +270,8 @@ char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
 		return (result);
 	else if (stack_a->size == 2 && stack_a->arr[0] < stack_a->arr[1])
 		return (ft_strattach(&result, "sa\n", 1));
+	update_offset(stack_a, 1);
+	update_offset(stack_b, 0);
 	while (stack_a->size > 3)
 	{
 		ops = push_next_nbr(stack_a, stack_b, 0);
@@ -239,6 +279,8 @@ char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
 		free(ops);
 	}
 	ft_strattach(&result, solve_3stack(stack_a, stack_b), 1);
+	update_offset(stack_a, 1);
+	update_offset(stack_b, 0);
 	while (stack_b->size > 0)
 	{
 		ops = push_next_nbr(stack_b, stack_a, 1);

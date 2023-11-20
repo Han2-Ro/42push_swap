@@ -28,6 +28,19 @@ int	max(int a, int b)
 		return (b);
 }
 
+int wa_array(int i, t_stack *stack)
+{
+	int res;
+
+	if (stack->size <= 0)
+		return (0);
+	res = (i + stack->offset) % stack->size;
+	if (res >= 0)
+		return (res);
+	else
+		return (stack->size + res);
+}
+
 void	error(char *msg, t_stack *stack_a, t_stack *stack_b)
 {
 	(void)msg;
@@ -35,6 +48,37 @@ void	error(char *msg, t_stack *stack_a, t_stack *stack_b)
 	free(stack_b->arr);
 	ft_putendl_fd("Error", 2);
 	exit(1);
+}
+
+void	debug(char *msg)
+{
+	(void) msg;
+	//ft_putendl_fd(msg, 1);
+}
+
+void	update_offset(t_stack *stack, int ascending)
+{
+	int	offset;
+	int	value;
+	int	i;
+
+	if (ascending)
+		value = -2147483648;
+	else
+		value = 2147483647;
+	i = 0;
+	while (i < stack->size)
+	{
+		debug("comparing values");
+		if ((ascending && stack->arr[i] >= value)
+			|| (!ascending && stack->arr[i] <= value))
+		{
+			value = stack->arr[i];
+			offset = i;
+		}
+		i++;
+	}
+	stack->offset = offset;
 }
 
 t_stack	stackdup(t_stack stack)

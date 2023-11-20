@@ -21,6 +21,7 @@ typedef struct s_stack
 	int	*arr;
 	int	size;
 	int	max_size;
+	int offset;
 }	t_stack;
 
 /*void	push(t_stack *src, t_stack *dst);
@@ -31,6 +32,7 @@ void	exec_operation(t_stack *stack_a, t_stack *stack_b, char *operation);*/
 char	*exec_str(t_stack *stack_a, t_stack *stack_b, char *str);
 int		fill_stack(t_stack *stack, char **str_arr, int size);
 t_stack	stackdup(t_stack stack);
+void	update_offset(t_stack *stack, int ascending);
 int		is_sorted(t_stack stack);
 int		check(t_stack stack, char *str);
 int		count_ops(char *str);
@@ -44,6 +46,10 @@ char	*ft_strattach(char **str, char *to_attach, int repeats);
 char	*emptystr(void);
 int		min(int a, int b);
 int		max(int a, int b);
+int wa_array(int i, t_stack *stack);
 void	error(char *msg, t_stack *stack_a, t_stack *stack_b);
+void	debug(char *msg);
+
+int	index_to_insert(t_stack *stack, int val, int ascending);
 
 #endif
