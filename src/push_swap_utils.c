@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:24:24 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/06 17:58:06 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/20 19:33:39 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	update_offset(t_stack *stack, int ascending)
 	i = 0;
 	while (i < stack->size)
 	{
-		debug("comparing values");
+		//debug("comparing values");
 		if ((ascending && stack->arr[i] >= value)
 			|| (!ascending && stack->arr[i] <= value))
 		{

@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/06 18:28:57 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/20 21:36:30 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,17 @@ int	index_to_insert(t_stack *stack, int val, int ascending)
 	int mid;
 	int	top;
 
+	if (stack->size <= 0)
+		return (0);
 	(void) ascending;
 	bottom = 0;
 	top = stack->size - 1;
 	if ((ascending && val < stack->arr[wa_array(top, stack)])
 		|| (!ascending && val > stack->arr[wa_array(top, stack)]))
-		return (top);
+		return (wa_array(top, stack));
 	if ((ascending && val > stack->arr[wa_array(bottom, stack)])
 		|| (!ascending && val < stack->arr[wa_array(bottom, stack)]))
-		return (top);
+		return (wa_array(top, stack));
 	while (bottom + 1 < top)
 	{
 		mid = (bottom + top) / 2;
@@ -98,13 +100,12 @@ int	index_to_insert(t_stack *stack, int val, int ascending)
 }
 
 /*
-int	index_to_insert(t_stack *stack, int val, int ascending)
+int	index_to_insert_old(t_stack *stack, int val, int ascending)
 {
 	int	i;
 	int	result;
 	int	val_res;
 
-	debug("index to insert");
 	result = 0;
 	if (ascending)
 		val_res = 2147483647;
@@ -113,7 +114,6 @@ int	index_to_insert(t_stack *stack, int val, int ascending)
 	i = 0;
 	while (i < stack->size)
 	{
-		debug("comparing values");
 		if ((!ascending && stack->arr[i] >= val_res)
 			|| (ascending && stack->arr[i] <= val_res))
 		{
@@ -129,7 +129,6 @@ int	index_to_insert(t_stack *stack, int val, int ascending)
 	i = 0;
 	while (i < stack->size)
 	{
-		debug("comparing values");
 		if ((!ascending && stack->arr[i] < val && stack->arr[i] >= val_res)
 			|| (ascending && stack->arr[i] > val && stack->arr[i] <= val_res))
 		{
@@ -147,7 +146,6 @@ int	count_rotates(t_stack *src, t_stack *dest, int i_src, int ascending)
 	int	i_dest;
 	int	opts[4];
 
-	debug("Counting rotates...");
 	i_dest = index_to_insert(dest, src->arr[i_src], ascending);
 	opts[0] = max(i_src, i_dest) + 1;
 	opts[1] = max(src->size - i_src, dest->size - i_dest) - 1;
@@ -185,7 +183,6 @@ char	*push_next_nbr(t_stack *src, t_stack *dest, int ascending)
 	int		i_src;
 	int		i_dest;
 
-	debug("pushing next nbr..");
 	result = emptystr();
 	tmp = emptystr();
 	i_src = find_next_nbr(src, dest, ascending);
@@ -260,35 +257,35 @@ char	*final_rotate(t_stack *stack_a, t_stack *stack_b)
 	return (exec_str(stack_a, stack_b, result));
 }
 
-char	*calculate_solution(t_stack *stack_a, t_stack *stack_b)
+void	calculate_solution(t_stack *stack_a, t_stack *stack_b)
 {
-	char	*result;
 	char	*ops;
 
-	result = emptystr();
 	if (stack_a->size <= 1)
-		return (result);
+		return ;
 	else if (stack_a->size == 2 && stack_a->arr[0] < stack_a->arr[1])
-		return (ft_strattach(&result, "sa\n", 1));
+	{
+		ft_printf("sa\n");
+		return ;
+	}
 	update_offset(stack_a, 1);
 	update_offset(stack_b, 0);
 	while (stack_a->size > 3)
 	{
 		ops = push_next_nbr(stack_a, stack_b, 0);
-		ft_strattach(&result, ops, 1);
+		ft_printf(ops);
 		free(ops);
 	}
-	ft_strattach(&result, solve_3stack(stack_a, stack_b), 1);
+	ft_printf(solve_3stack(stack_a, stack_b));
 	update_offset(stack_a, 1);
 	update_offset(stack_b, 0);
 	while (stack_b->size > 0)
 	{
 		ops = push_next_nbr(stack_b, stack_a, 1);
-		ft_strattach(&result, swap_stacks(ops), 1);
+		ft_printf(swap_stacks(ops));
 		free(ops);
 	}
 	ops = final_rotate(stack_a, stack_b);
-	ft_strattach(&result, ops, 1);
+	ft_printf(ops);
 	free(ops);
-	return (result);
 }

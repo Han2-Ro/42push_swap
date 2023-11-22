@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:14:43 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/06 17:40:06 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/20 20:45:45 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		init_stacks(int argc, char **argv, t_stack *stack_a, t_stack *stack_b);
 void	quick_sort(int *arr, int start, int end);
 void	convert_stack(t_stack *stack);
 void	print_stack(t_stack stack);
-char	*calculate_solution(t_stack *stack_a, t_stack *stack_b);
+void	calculate_solution(t_stack *stack_a, t_stack *stack_b);
 char	*ft_strattach(char **str, char *to_attach, int repeats);
 char	*emptystr(void);
 int		min(int a, int b);
