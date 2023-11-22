@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_operation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:59:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/20 20:38:35 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/22 23:26:53 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ char	*exec_str(t_stack *stack_a, t_stack *stack_b, char *str)
 {
 	int	i;
 
+	if (!str)
+		return (str);
 	i = 0;
 	while (str[i])
 	{

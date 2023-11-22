@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:28:38 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/06 17:39:15 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/22 23:45:08 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char	*emptystr(void)
 	char	*str;
 
 	str = malloc(sizeof(char));
-	str[0] = '\0';
+	if (str)
+		str[0] = '\0';
 	return (str);
 }
 
@@ -41,9 +42,11 @@ char	*ft_strattach(char **str, char *to_attach, int repeats)
 {
 	char	*result;
 
+	result = NULL;
 	if (repeats < 1)
 		return (*str);
-	result = ft_strjoin(*str, to_attach);
+	if (*str && to_attach)
+		result = ft_strjoin(*str, to_attach);
 	free(*str);
 	*str = result;
 	ft_strattach(str, to_attach, repeats - 1);

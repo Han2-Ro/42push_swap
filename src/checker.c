@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:35:39 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/06 18:52:26 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/22 22:51:15 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,17 @@ int	main(int argc, char **argv)
 	ops = emptystr();
 	while (line)
 	{
+		ft_strattach(&ops, line, 1);
 		free(line);
 		line = get_next_line(0);
-		ft_strattach(&ops, line, 1);
 	}
 	exec_str(&stack_a, &stack_b, ops);
+	free(line);
+	free(ops);
 	if (is_sorted(stack_a))
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
+	free(stack_a.arr);
+	free(stack_b.arr);
 }

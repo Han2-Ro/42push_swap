@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_stacks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 23:11:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/06 18:19:28 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/22 23:11:18 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	init_stacks(int argc, char **argv, t_stack *stack_a, t_stack *stack_b)
 	if (argc == 2)
 	{
 		tmp = ft_split(argv[1], ' ');
+		if (!tmp)
+			error("ERROR: malloc failed", NULL, NULL);
 		while (tmp[size])
 			size++;
 		fill_stack(stack_a, tmp, size);

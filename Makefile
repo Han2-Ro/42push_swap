@@ -10,11 +10,11 @@ SRCS_BONUS = checker.c exec_operation.c push_swap_utils.c init_stacks.c string_u
 OBJS_BONUS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS_BONUS))
 NAME_BONUS = checker
 
-all: $(NAME) $(NAME_BONUS)
-
 $(NAME): $(OBJS)
 	make -C ./libft
 	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -o $(NAME)
+
+all: $(NAME) $(NAME_BONUS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)

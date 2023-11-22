@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_solution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/20 21:36:30 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/22 23:44:25 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*swap_stacks(char *str)
 {
 	int	i;
 
+	if (!str)
+		return (str);
 	i = 0;
 	while (str[i])
 	{
@@ -273,6 +275,8 @@ void	calculate_solution(t_stack *stack_a, t_stack *stack_b)
 	while (stack_a->size > 3)
 	{
 		ops = push_next_nbr(stack_a, stack_b, 0);
+		if (!ops)
+			error("ERROR: malloc failed", stack_a, stack_b);
 		ft_printf(ops);
 		free(ops);
 	}
@@ -282,10 +286,14 @@ void	calculate_solution(t_stack *stack_a, t_stack *stack_b)
 	while (stack_b->size > 0)
 	{
 		ops = push_next_nbr(stack_b, stack_a, 1);
+		if (!ops)
+			error("ERROR: malloc failed", stack_a, stack_b);
 		ft_printf(swap_stacks(ops));
 		free(ops);
 	}
 	ops = final_rotate(stack_a, stack_b);
+	if (!ops)
+		error("ERROR: malloc failed", stack_a, stack_b);
 	ft_printf(ops);
 	free(ops);
 }

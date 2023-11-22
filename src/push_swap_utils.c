@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:24:24 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/20 19:33:39 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/22 23:12:33 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int wa_array(int i, t_stack *stack)
 void	error(char *msg, t_stack *stack_a, t_stack *stack_b)
 {
 	(void)msg;
-	free(stack_a->arr);
+	if (stack_a)
+		free(stack_a->arr);
+	if (stack_b)
 	free(stack_b->arr);
 	ft_putendl_fd("Error", 2);
 	exit(1);

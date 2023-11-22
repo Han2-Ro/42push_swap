@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/20 21:21:29 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/22 22:57:43 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
 	t_stack	stack_b;
-	//char	*solution;
 
 	//TODO: check input: numbres out of int range
 	//TODO: fix memory leaks
@@ -51,10 +50,7 @@ int	main(int argc, char **argv)
 	//TODO: norminette
 	init_stacks(argc, argv, &stack_a, &stack_b);
 	update_offset(&stack_a, 0);
-	//test_index_to_insert(&stack_a);
 	calculate_solution(&stack_a, &stack_b);
-	//ft_printf("%s", solution);
-	//free(solution);
 	free(stack_a.arr);
 	free(stack_b.arr);
 }
