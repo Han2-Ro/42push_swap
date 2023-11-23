@@ -6,7 +6,7 @@
 /*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/22 23:44:25 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/23 10:14:07 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,9 +265,10 @@ void	calculate_solution(t_stack *stack_a, t_stack *stack_b)
 
 	if (stack_a->size <= 1)
 		return ;
-	else if (stack_a->size == 2 && stack_a->arr[0] < stack_a->arr[1])
+	else if (stack_a->size == 2)
 	{
-		ft_printf("sa\n");
+		if (stack_a->arr[0] < stack_a->arr[1])
+			ft_printf("sa\n");
 		return ;
 	}
 	update_offset(stack_a, 1);

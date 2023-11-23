@@ -4,5 +4,6 @@ push_swap_visualizer
 objs
 push_swap_tester
 push_swap
+tester/
 checker_linux
 imgui.ini

@@ -6,7 +6,7 @@
 /*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 23:11:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/22 23:11:18 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/23 10:20:39 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	check_is_int(char *str)
 	i = 0;
 	if (str[i] == '+' || str[i] == '-')
 		i++;
+	if (!ft_isdigit(str[i]))
+		return (0);
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
@@ -26,6 +28,12 @@ int	check_is_int(char *str)
 		i++;
 	}
 	//TODO: check for overflow
+	if (ft_strlen(str) <= 9)
+		return (1);
+	while (*str == '+' || *str == '0')
+		str++;
+	if (ft_strncmp(ft_itoa(ft_atoi(str)), str, 11) != 0)
+		return (0);
 	return (1);
 }
 
