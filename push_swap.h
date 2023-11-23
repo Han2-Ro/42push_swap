@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:14:43 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/20 20:45:45 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/24 00:29:36 by hannes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ typedef struct s_stack
 	int	max_size;
 	int offset;
 }	t_stack;
+
+typedef struct s_rotates
+{
+	int nra;
+	int nrra;
+	int nrb;
+	int nrrb;
+}	t_rotates;
 
 /*void	push(t_stack *src, t_stack *dst);
 void	swap(t_stack *stack);
