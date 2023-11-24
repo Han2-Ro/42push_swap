@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:35:39 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/22 22:51:15 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/24 23:33:49 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 	char	*line;
 	char	*ops;
 
+	//TODO: print Error on invalid operation
 	init_stacks(argc, argv, &stack_a, &stack_b);
 	line = emptystr();
 	ops = emptystr();

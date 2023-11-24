@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:51:37 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/24 23:13:11 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/24 23:49:34 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,21 +129,11 @@ char	*final_rotate(t_stack *stack_a, t_stack *stack_b)
 	return (exec_str(stack_a, stack_b, result));
 }
 
-void	solve(t_stack *stack_a, t_stack *stack_b)
+void	solve_bigger3(t_stack *stack_a, t_stack *stack_b)
 {
 	char	*ops;
 
-	if (stack_a->size <= 1)
-		return ;
-	else if (stack_a->size == 2)
-	{
-		if (stack_a->arr[0] < stack_a->arr[1])
-			ft_printf("sa\n");
-		return ;
-	}
-	//TODO: what to do for size==4?
-	if (stack_a->size >= 5)
-		ft_printf(exec_str(stack_a, stack_b, "pb\npb\n"));
+	ft_printf(exec_str(stack_a, stack_b, "pb\n"));
 	update_offset(stack_a, 1);
 	update_offset(stack_b, 0);
 	while (stack_a->size > 3)
@@ -162,4 +152,20 @@ void	solve(t_stack *stack_a, t_stack *stack_b)
 		error("ERROR: malloc failed", stack_a, stack_b);
 	ft_printf(ops);
 	free(ops);
+}
+
+void	solve(t_stack *stack_a, t_stack *stack_b)
+{
+	if (stack_a->size <= 1)
+		return ;
+	else if (stack_a->size == 2)
+	{
+		if (stack_a->arr[0] < stack_a->arr[1])
+			ft_printf("sa\n");
+		return ;
+	}
+	else if (stack_a->size == 3)
+		ft_printf(solve_3stack(stack_a, stack_b));
+	else if (stack_a->size > 3)
+		solve_bigger3(stack_a, stack_b);
 }
