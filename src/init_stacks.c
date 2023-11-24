@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_stacks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 23:11:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/23 10:20:39 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/24 23:09:53 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	check_is_int(char *str)
 			return (0);
 		i++;
 	}
-	//TODO: check for overflow
 	if (ft_strlen(str) <= 9)
 		return (1);
 	while (*str == '+' || *str == '0')
@@ -66,7 +65,6 @@ int	fill_stack(t_stack *stack, char **str_arr, int size)
 		return (0);
 	stack->size = size;
 	stack->max_size = size;
-	//TODO: check if input is valid
 	i = 0;
 	while (i < size)
 	{

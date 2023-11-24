@@ -1,8 +1,21 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/11/24 22:50:02 by hrother           #+#    #+#              #
+#    Updated: 2023/11/24 23:22:58 by hrother          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = cc
 CFLAGS = -g -Wall -Wextra -Werror
 SRC_DIR = src
 OBJ_DIR = objs
-SRCS = main.c init_stacks.c exec_operation.c push_swap_utils.c string_utils.c quicksort.c convert_stack.c calculate_solution.c find_rotations.c# rec_brootforce.c
+SRCS = main.c init_stacks.c exec_operation.c push_swap_utils.c string_utils.c \
+	solve.c find_rotations.c find_next_nbr.c # rec_brootforce.c
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 NAME = push_swap
 

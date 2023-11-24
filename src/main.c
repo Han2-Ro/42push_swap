@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/24 00:21:50 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/24 22:40:20 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 	//TODO: norminette
 	init_stacks(argc, argv, &stack_a, &stack_b);
 	//print_stack(stack_a);
-	calculate_solution(&stack_a, &stack_b);
+	solve(&stack_a, &stack_b);
 	free(stack_a.arr);
 	free(stack_b.arr);
 }

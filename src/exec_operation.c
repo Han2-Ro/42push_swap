@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:59:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/24 21:34:31 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/24 22:59:17 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ char	*exec_str(t_stack *stack_a, t_stack *stack_b, char *str)
 	if (!str)
 		return (str);
 	i = 0;
-	//ft_printf("executing...'%s'...\n", str);
 	while (str[i])
 	{
 		exec_operation(stack_a, stack_b, str + i);
@@ -115,17 +114,4 @@ char	*exec_str(t_stack *stack_a, t_stack *stack_b, char *str)
 		i++;
 	}
 	return (str);
-}
-
-int check(t_stack stack, char *str)
-{
-	t_stack stack_a;
-	t_stack stack_b;
-
-	stack_a = stackdup(stack);
-	stack_b.max_size = stack_a.max_size;
-	stack_b.size = 0;
-	stack_b.arr = malloc(stack_b.max_size * sizeof(int));
-	exec_str(&stack_a, &stack_b, str);
-	return (is_sorted(stack_a));
 }
