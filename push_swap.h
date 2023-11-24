@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:14:43 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/24 00:29:36 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/24 16:43:51 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ typedef struct s_stack
 	int offset;
 }	t_stack;
 
-typedef struct s_rotates
+typedef struct s_rotate
 {
 	int nra;
 	int nrra;
 	int nrb;
 	int nrrb;
-}	t_rotates;
+}	t_rotate;
 
 /*void	push(t_stack *src, t_stack *dst);
 void	swap(t_stack *stack);
@@ -54,10 +54,13 @@ char	*ft_strattach(char **str, char *to_attach, int repeats);
 char	*emptystr(void);
 int		min(int a, int b);
 int		max(int a, int b);
-int wa_array(int i, t_stack *stack);
+void	ft_swap(int *a, int *b);
+int		wa_array(int i, t_stack *stack);
 void	error(char *msg, t_stack *stack_a, t_stack *stack_b);
 void	debug(char *msg);
+t_rotate	generate_rot(t_stack *src, t_stack *dest, int ascending);
 
 int	index_to_insert(t_stack *stack, int val, int ascending);
+int	find_next_nbr(t_stack *src, t_stack *dest, int ascending);
 
 #endif

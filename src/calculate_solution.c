@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_solution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:51:11 by hannes            #+#    #+#             */
-/*   Updated: 2023/11/24 00:32:35 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/24 16:49:26y hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,50 @@ int	find_next_nbr(t_stack *src, t_stack *dest, int ascending)
 	return (best_i);
 }
 
+void	exec_rotate(t_stack *stack_a, t_stack *stack_b, t_rotate rotate)
+{
+	while (rotate.nra && rotate.nrb)
+	{
+		ft_printf("%s", exec_str(stack_a, stack_b, "rr\n"));
+		rotate.nra--;
+		rotate.nrb--;
+	}
+	while (rotate.nra-- > 0)
+		ft_printf("%s", exec_str(stack_a, stack_b, "ra\n"));
+	while (rotate.nrb-- > 0)
+		ft_printf("%s", exec_str(stack_a, stack_b, "rb\n"));
+	while (rotate.nrra && rotate.nrrb)
+	{
+		ft_printf("%s", exec_str(stack_a, stack_b, "rrr\n"));
+		rotate.nrra--;
+		rotate.nrrb--;
+	}
+	while (rotate.nrra-- > 0)
+		ft_printf("%s", exec_str(stack_a, stack_b, "rra\n"));
+	while (rotate.nrrb-- > 0)
+		ft_printf("%s", exec_str(stack_a, stack_b, "rrb\n"));
+}
+
+void	push_next_nbr(t_stack *src, t_stack *dest, int btoa)
+{
+	t_rotate rotate;
+
+	rotate = generate_rot(src, dest, btoa);
+	if (btoa)
+	{
+		ft_swap(&rotate.nra, &rotate.nrb);
+		ft_swap(&rotate.nrra, &rotate.nrrb);
+	}
+	exec_rotate(src, dest, rotate);
+	if (btoa)
+		ft_printf(exec_str(dest, src, "pa\n"));
+	else
+		ft_printf(exec_str(src, dest, "pb\n"));
+	update_offset(src, !btoa);
+	update_offset(dest, btoa);
+}
+
+/*
 char	*push_next_nbr(t_stack *src, t_stack *dest, int ascending)
 {
 	char	*result;
@@ -232,6 +276,7 @@ char	*push_next_nbr(t_stack *src, t_stack *dest, int ascending)
 	update_offset(dest, ascending);
 	return (result);
 }
+*/
 
 char	*final_rotate(t_stack *stack_a, t_stack *stack_b)
 {
@@ -271,26 +316,35 @@ void	calculate_solution(t_stack *stack_a, t_stack *stack_b)
 			ft_printf("sa\n");
 		return ;
 	}
+	//TODO: what to do for size==4?
+	if (stack_a->size >= 5)
+		ft_printf(exec_str(stack_a, stack_b, "pb\npb\n"));
 	update_offset(stack_a, 1);
 	update_offset(stack_b, 0);
 	while (stack_a->size > 3)
 	{
+		/*
 		ops = push_next_nbr(stack_a, stack_b, 0);
 		if (!ops)
 			error("ERROR: malloc failed", stack_a, stack_b);
 		ft_printf(ops);
 		free(ops);
+		*/
+		push_next_nbr(stack_a, stack_b, 0);
 	}
 	ft_printf(solve_3stack(stack_a, stack_b));
 	update_offset(stack_a, 1);
 	update_offset(stack_b, 0);
 	while (stack_b->size > 0)
 	{
+		/*
 		ops = push_next_nbr(stack_b, stack_a, 1);
 		if (!ops)
 			error("ERROR: malloc failed", stack_a, stack_b);
 		ft_printf(swap_stacks(ops));
 		free(ops);
+		*/
+		push_next_nbr(stack_b, stack_a, 1);
 	}
 	ops = final_rotate(stack_a, stack_b);
 	if (!ops)

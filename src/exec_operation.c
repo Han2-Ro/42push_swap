@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_operation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hannes <hrother@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:59:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/22 23:26:53 by hannes           ###   ########.fr       */
+/*   Updated: 2023/11/24 18:10:54 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char	*exec_str(t_stack *stack_a, t_stack *stack_b, char *str)
 	if (!str)
 		return (str);
 	i = 0;
+	ft_printf("executing...'%s'...\n", str);
 	while (str[i])
 	{
 		exec_operation(stack_a, stack_b, str + i);
