@@ -211,8 +211,10 @@ void	push_next_nbr(t_stack *src, t_stack *dest, int btoa)
 	{
 		ft_swap(&rotate.nra, &rotate.nrb);
 		ft_swap(&rotate.nrra, &rotate.nrrb);
+		exec_rotate(dest, src, rotate);
 	}
-	exec_rotate(src, dest, rotate);
+	else
+		exec_rotate(src, dest, rotate);
 	if (btoa)
 		ft_printf(exec_str(dest, src, "pa\n"));
 	else
@@ -331,6 +333,8 @@ void	calculate_solution(t_stack *stack_a, t_stack *stack_b)
 		free(ops);
 		*/
 		push_next_nbr(stack_a, stack_b, 0);
+		//print_stack(*stack_a);
+		//print_stack(*stack_b);
 	}
 	ft_printf(solve_3stack(stack_a, stack_b));
 	update_offset(stack_a, 1);
@@ -345,6 +349,8 @@ void	calculate_solution(t_stack *stack_a, t_stack *stack_b)
 		free(ops);
 		*/
 		push_next_nbr(stack_b, stack_a, 1);
+		//print_stack(*stack_a);
+		//print_stack(*stack_b);
 	}
 	ops = final_rotate(stack_a, stack_b);
 	if (!ops)
