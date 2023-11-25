@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:14:43 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/24 23:21:26 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/25 12:43:57 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,11 @@ void	rotate(t_stack *stack);
 void	rev_rotate(t_stack *stack);
 void	exec_operation(t_stack *stack_a, t_stack *stack_b, char *operation);*/
 char	*exec_str(t_stack *stack_a, t_stack *stack_b, char *str);
-int		fill_stack(t_stack *stack, char **str_arr, int size);
 void	update_offset(t_stack *stack, int ascending);
 int		is_sorted(t_stack stack);
 char	*shortes_solve(t_stack stack_a, t_stack stack_b, char *str, int limit);
 int		init_stacks(int argc, char **argv, t_stack *stack_a, t_stack *stack_b);
 void	quick_sort(int *arr, int start, int end);
-void	print_stack(t_stack stack);
 void	solve(t_stack *stack_a, t_stack *stack_b);
 char	*ft_strattach(char **str, char *to_attach, int repeats);
 char	*emptystr(void);

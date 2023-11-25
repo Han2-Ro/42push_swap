@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:51:37 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/24 23:49:34 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/25 13:15:55 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*solve_3stack(t_stack *stack_a, t_stack *stack_b)
 	return (0);
 }
 
-void	exec_rotate(t_stack *stack_a, t_stack *stack_b, t_rotate rotate)
+static void	exec_rotate(t_stack *stack_a, t_stack *stack_b, t_rotate rotate)
 {
 	while (rotate.nra && rotate.nrb)
 	{
