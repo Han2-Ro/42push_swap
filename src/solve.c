@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:51:37 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/25 13:15:55 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/25 13:41:00 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,36 +103,14 @@ void	push_next_nbr(t_stack *src, t_stack *dest, int btoa)
 	update_offset(dest, btoa);
 }
 
-char	*final_rotate(t_stack *stack_a, t_stack *stack_b)
+void	final_rotate(t_stack *stack_a, t_stack *stack_b)
 {
-	int		i;
-	int		min_i;
-	int		min_val;
-	char	*result;
-
-	result = emptystr();
-	i = 0;
-	min_val = 2147483647;
-	while (i < stack_a->size)
-	{
-		if (stack_a->arr[i] < min_val)
-		{
-			min_i = i;
-			min_val = stack_a->arr[i];
-		}
-		i++;
-	}
-	if (min_i + 1 < stack_a->size - min_i - 1)
-		ft_strattach(&result, "rra\n", min_i + 1);
-	else
-		ft_strattach(&result, "ra\n", stack_a->size - min_i -1);
-	return (exec_str(stack_a, stack_b, result));
+	update_offset(stack_a, 1);
+	exec_rotate (stack_a, stack_b, init_rotates(0, stack_a->offset, 0, 0));
 }
 
 void	solve_bigger3(t_stack *stack_a, t_stack *stack_b)
 {
-	char	*ops;
-
 	ft_printf(exec_str(stack_a, stack_b, "pb\n"));
 	update_offset(stack_a, 1);
 	update_offset(stack_b, 0);
@@ -147,11 +125,7 @@ void	solve_bigger3(t_stack *stack_a, t_stack *stack_b)
 	{
 		push_next_nbr(stack_b, stack_a, 1);
 	}
-	ops = final_rotate(stack_a, stack_b);
-	if (!ops)
-		error("ERROR: malloc failed", stack_a, stack_b);
-	ft_printf(ops);
-	free(ops);
+	final_rotate(stack_a, stack_b);
 }
 
 void	solve(t_stack *stack_a, t_stack *stack_b)

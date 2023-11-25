@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:59:33 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/25 13:24:04 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/25 13:56:56 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,13 @@ static int	exec_rotate(t_stack *stack_a, t_stack *stack_b, char *operation)
 		if (operation[2] == 'r')
 			return (rev_rotate(stack_a), rev_rotate(stack_b), ret);
 	}
-	else
-	{
-		ret = operation[2] == '\n';
-		if (operation[1] == 'a')
-			return (rotate(stack_a), ret);
-		if (operation[1] == 'b')
-			return (rotate(stack_b), ret);
-		if (operation[2] == 'r')
-			return (rotate(stack_a), rotate(stack_b), ret);
-	}
+	ret = operation[2] == '\n';
+	if (operation[1] == 'a')
+		return (rotate(stack_a), ret);
+	if (operation[1] == 'b')
+		return (rotate(stack_b), ret);
+	if (operation[1] == 'r')
+		return (rotate(stack_a), rotate(stack_b), ret);
 	return (0);
 }
 

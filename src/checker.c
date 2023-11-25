@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:35:39 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/25 13:20:03 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/25 13:48:58 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	main(int argc, char **argv)
 	t_stack	stack_b;
 	char	*line;
 
-	//TODO: print Error on invalid operation
+	if (argc < 2)
+		return (0);
 	init_stacks(argc, argv, &stack_a, &stack_b);
 	line = get_next_line(0);
 	while (line)
@@ -31,7 +32,6 @@ int	main(int argc, char **argv)
 		free(line);
 		line = get_next_line(0);
 	}
-	//free(line);
 	if (is_sorted(stack_a))
 		ft_printf("OK\n");
 	else

@@ -1,9 +1,8 @@
 .swp
 .vscode
-push_swap_visualizer
+visualizer
 objs
-push_swap_tester
 push_swap
-tester/
+tester
 checker_linux
 imgui.ini
