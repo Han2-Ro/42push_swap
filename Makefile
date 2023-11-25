@@ -6,20 +6,21 @@
 #    By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 22:50:02 by hrother           #+#    #+#              #
-#    Updated: 2023/11/25 12:50:09 by hrother          ###   ########.fr        #
+#    Updated: 2023/11/25 15:01:14 by hrother          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SRC_DIR = src
 OBJ_DIR = objs
-SRCS = main.c init_stacks.c exec_operation.c push_swap_utils.c string_utils.c \
-	solve.c find_rotations.c find_next_nbr.c
+SRCS = main.c init_stacks.c exec_operation.c push_swap_utils.c \
+	solve.c rotset_utils.c find_next_nbr.c operations.c
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 NAME = push_swap
 
-SRCS_BONUS = checker.c exec_operation.c push_swap_utils.c init_stacks.c string_utils.c
+SRCS_BONUS = checker.c exec_operation.c push_swap_utils.c \
+	init_stacks.c operations.c
 OBJS_BONUS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS_BONUS))
 NAME_BONUS = checker
 

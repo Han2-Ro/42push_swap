@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:48:36 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/25 12:44:11 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/25 15:03:04 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	main(int argc, char **argv)
 	t_stack	stack_a;
 	t_stack	stack_b;
 
-	//TODO: norminette
 	init_stacks(argc, argv, &stack_a, &stack_b);
 	solve(&stack_a, &stack_b);
 	free(stack_a.arr);

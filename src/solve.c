@@ -6,29 +6,11 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:51:37 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/25 13:41:00 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/25 15:24:32 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-char	*swap_stacks(char *str)
-{
-	int	i;
-
-	if (!str)
-		return (str);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == 'a')
-			str[i] = 'b';
-		else if (str[i] == 'b')
-			str[i] = 'a';
-		i++;
-	}
-	return (str);
-}
 
 char	*solve_3stack(t_stack *stack_a, t_stack *stack_b)
 {
@@ -39,7 +21,7 @@ char	*solve_3stack(t_stack *stack_a, t_stack *stack_b)
 		else
 			return (exec_str(stack_a, stack_b, "sa\n"));
 	}
-	else if (stack_a->arr[1] > stack_a->arr[0] 
+	else if (stack_a->arr[1] > stack_a->arr[0]
 		&& stack_a->arr[1] > stack_a->arr[2])
 	{
 		if (stack_a->arr[2] > stack_a->arr[0])
@@ -58,43 +40,19 @@ char	*solve_3stack(t_stack *stack_a, t_stack *stack_b)
 	return (0);
 }
 
-static void	exec_rotate(t_stack *stack_a, t_stack *stack_b, t_rotate rotate)
-{
-	while (rotate.nra && rotate.nrb)
-	{
-		ft_printf("%s", exec_str(stack_a, stack_b, "rr\n"));
-		rotate.nra--;
-		rotate.nrb--;
-	}
-	while (rotate.nra-- > 0)
-		ft_printf("%s", exec_str(stack_a, stack_b, "ra\n"));
-	while (rotate.nrb-- > 0)
-		ft_printf("%s", exec_str(stack_a, stack_b, "rb\n"));
-	while (rotate.nrra && rotate.nrrb)
-	{
-		ft_printf("%s", exec_str(stack_a, stack_b, "rrr\n"));
-		rotate.nrra--;
-		rotate.nrrb--;
-	}
-	while (rotate.nrra-- > 0)
-		ft_printf("%s", exec_str(stack_a, stack_b, "rra\n"));
-	while (rotate.nrrb-- > 0)
-		ft_printf("%s", exec_str(stack_a, stack_b, "rrb\n"));
-}
-
 void	push_next_nbr(t_stack *src, t_stack *dest, int btoa)
 {
-	t_rotate	rotate;
+	t_rotset	rotate;
 
 	rotate = generate_rot(src, dest, btoa);
 	if (btoa)
 	{
 		ft_swap(&rotate.nra, &rotate.nrb);
 		ft_swap(&rotate.nrra, &rotate.nrrb);
-		exec_rotate(dest, src, rotate);
+		exec_rotset(dest, src, rotate);
 	}
 	else
-		exec_rotate(src, dest, rotate);
+		exec_rotset(src, dest, rotate);
 	if (btoa)
 		ft_printf(exec_str(dest, src, "pa\n"));
 	else
@@ -105,12 +63,22 @@ void	push_next_nbr(t_stack *src, t_stack *dest, int btoa)
 
 void	final_rotate(t_stack *stack_a, t_stack *stack_b)
 {
+	int	nra;
+	int	nrra;
+
+	nra = stack_a->size - stack_a->offset;
+	nrra = stack_a->offset;
 	update_offset(stack_a, 1);
-	exec_rotate (stack_a, stack_b, init_rotates(0, stack_a->offset, 0, 0));
+	if (nra < nrra)
+		exec_rotset (stack_a, stack_b, init_rotates(nra, 0, 0, 0));
+	else
+		exec_rotset (stack_a, stack_b, init_rotates(0, nrra, 0, 0));
 }
 
 void	solve_bigger3(t_stack *stack_a, t_stack *stack_b)
 {
+	if (is_sorted(*stack_a))
+		return ;
 	ft_printf(exec_str(stack_a, stack_b, "pb\n"));
 	update_offset(stack_a, 1);
 	update_offset(stack_b, 0);

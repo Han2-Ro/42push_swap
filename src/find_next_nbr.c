@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:44:41 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/24 22:55:31 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/25 15:14:28 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ int	index_to_insert(t_stack *stack, int val, int ascending)
 
 int	count_rotates(t_stack *src, t_stack *dest, int i_src, int ascending)
 {
-	int	i_dest;
-	int	opts[4];
+	int			i_dest;
+	t_rotset	res;
 
 	i_dest = index_to_insert(dest, src->arr[i_src], ascending);
-	opts[0] = max(i_src, i_dest) + 1;
-	opts[1] = max(src->size - i_src, dest->size - i_dest) - 1;
-	opts[2] = i_src + dest->size - i_dest;
-	opts[3] = src->size - i_src + i_dest;
-	return (min(min(opts[0], opts[1]), min(opts[2], opts[3])));
+	res.nra = src->size - i_src - 1;
+	res.nrra = i_src + 1;
+	res.nrb = dest->size - i_dest - 1;
+	res.nrrb = i_dest + 1;
+	return (cost(select_best_rot(res)));
 }
 
 int	find_next_nbr(t_stack *src, t_stack *dest, int ascending)
@@ -61,7 +61,7 @@ int	find_next_nbr(t_stack *src, t_stack *dest, int ascending)
 	int	best_val;
 	int	current_val;
 
-	best_val = 2147483647; //TODO: max int
+	best_val = 2147483647;
 	i = 0;
 	while (i < src->size)
 	{

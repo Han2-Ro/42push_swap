@@ -6,27 +6,11 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:24:24 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/24 23:13:46 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/25 15:26:50 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-int	min(int a, int b)
-{
-	if (a <= b)
-		return (a);
-	else
-		return (b);
-}
-
-int	max(int a, int b)
-{
-	if (a >= b)
-		return (a);
-	else
-		return (b);
-}
 
 void	ft_swap(int *a, int *b)
 {
