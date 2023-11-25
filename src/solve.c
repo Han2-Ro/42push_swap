@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:51:37 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/25 15:24:32 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/25 16:21:06 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	final_rotate(t_stack *stack_a, t_stack *stack_b)
 	int	nra;
 	int	nrra;
 
+	update_offset(stack_a, 1);
 	nra = stack_a->size - stack_a->offset;
 	nrra = stack_a->offset;
-	update_offset(stack_a, 1);
 	if (nra < nrra)
 		exec_rotset (stack_a, stack_b, init_rotates(nra, 0, 0, 0));
 	else
@@ -107,7 +107,10 @@ void	solve(t_stack *stack_a, t_stack *stack_b)
 		return ;
 	}
 	else if (stack_a->size == 3)
+	{
 		ft_printf(solve_3stack(stack_a, stack_b));
+		final_rotate(stack_a, stack_b);
+	}
 	else if (stack_a->size > 3)
 		solve_bigger3(stack_a, stack_b);
 }
