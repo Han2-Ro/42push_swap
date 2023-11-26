@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:51:37 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/26 14:13:34 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/26 15:24:11 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	push_next_nbr(t_stack *src, t_stack *dest, int btoa)
 {
 	t_rotset	rotate;
 
+	update_offset(src, !btoa);
+	update_offset(dest, btoa);
 	rotate = generate_rot(src, dest, btoa);
 	if (btoa)
 	{
@@ -59,8 +61,6 @@ void	push_next_nbr(t_stack *src, t_stack *dest, int btoa)
 		ft_printf(exec_str(dest, src, "pa\n"));
 	else
 		ft_printf(exec_str(src, dest, "pb\n"));
-	update_offset(src, !btoa);
-	update_offset(dest, btoa);
 }
 
 void	final_rotate(t_stack *stack_a, t_stack *stack_b)
