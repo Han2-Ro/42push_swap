@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:51:37 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/25 16:21:06 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/26 14:13:34 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void	push_next_nbr(t_stack *src, t_stack *dest, int btoa)
 		exec_rotset(dest, src, rotate);
 	}
 	else
+	{
 		exec_rotset(src, dest, rotate);
+	}
 	if (btoa)
 		ft_printf(exec_str(dest, src, "pa\n"));
 	else

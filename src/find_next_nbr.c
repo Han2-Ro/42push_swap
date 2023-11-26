@@ -6,7 +6,7 @@
 /*   By: hrother <hrother@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:44:41 by hrother           #+#    #+#             */
-/*   Updated: 2023/11/25 15:14:28 by hrother          ###   ########.fr       */
+/*   Updated: 2023/11/26 14:50:14 by hrother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	find_next_nbr(t_stack *src, t_stack *dest, int ascending)
 	int	current_val;
 
 	best_val = 2147483647;
-	i = 0;
-	while (i < src->size)
+	i = src->size - 1;
+	while (i >= 0)
 	{
 		current_val = count_rotates(src, dest, i, ascending);
 		if (current_val < best_val)
@@ -71,7 +71,7 @@ int	find_next_nbr(t_stack *src, t_stack *dest, int ascending)
 			best_i = i;
 			best_val = current_val;
 		}
-		i++;
+		i--;
 	}
 	return (best_i);
 }
